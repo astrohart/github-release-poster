@@ -100,6 +100,8 @@ namespace github_release_poster
                 // try to keep going even if a particular file or folder fails
                 events.FileFailure += (s1, a1) => a1.ContinueRunning = true;
                 events.DirectoryFailure += (s2, a2) => a2.ContinueRunning = true;
+                //events.CompletedFile += (s3, a3) => Console.WriteLine($"Finished file '{a3.Name}.");
+                //events.ProcessFile += (s4, a4) => Console.WriteLine($"Zipping file {a4.Name}...");
                 
                 new FastZip(events)
                     .CreateZip(
