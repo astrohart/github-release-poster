@@ -1,10 +1,10 @@
-﻿using System;
+﻿using github_release_poster.Properties;
+using log4net;
+using System;
 using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using github_release_poster.Properties;
-using log4net;
 
 namespace github_release_poster
 {
@@ -17,6 +17,12 @@ namespace github_release_poster
         {
             // default ExceptionStackDepth is 1 for a Windows Forms app. Set to 2 for a Console App.
             ExceptionStackDepth = 1;
+
+            /* -1 verbosity is totally silent */
+            Verbosity = -1;
+
+            /* console logging support enabled by default */
+            NoConsole = false;
         }
 
         /// <summary>
@@ -48,8 +54,17 @@ namespace github_release_poster
         /// </summary>
         public static bool MuteDebugLevelIfReleaseMode { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value which indicates whether output should never be written to the console.
+        /// This property trumps <see cref="ConsoleOnly"/>.
+        /// </summary>
+        public static bool NoConsole { get; set; }
+
         public static TextWriter Out { get; set; }
 
+        /// <summary>
+        /// Value that specifies the verbosity level of the debug logger. -1 suppresses all output to all logs; 0 writes only minimal output, and 1 writes all logging.
+        /// </summary>
         public static int Verbosity { get; set; }
 
         /// <summary>
@@ -228,13 +243,16 @@ namespace github_release_poster
 
         public static void WriteLine(DebugLevel debugLevel, string format, params object[] args)
         {
+            if (Verbosity == -1)
+                return; // absolutely no logging is written with verbosity -1
+
             if (string.IsNullOrWhiteSpace(format))
             {
                 // cannot do anything with a blank entry.
                 return;
             }
 
-            if (!LogFileManager.IsLoggingInitialized)
+            if (!LogFileManager.IsLoggingInitialized && !NoConsole)
             {
                 /* only write to the console if the log file manager is not initialized yet */
                 Console.WriteLine(format, args);

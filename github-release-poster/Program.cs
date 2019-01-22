@@ -1,7 +1,7 @@
-﻿using System;
+﻿using github_release_poster.Properties;
+using System;
 using System.Diagnostics;
 using System.Reflection;
-using github_release_poster.Properties;
 
 namespace github_release_poster
 {
@@ -10,14 +10,31 @@ namespace github_release_poster
         [STAThread]
         public static void Main(string[] args)
         {
+            LogFileManager.InitializeLogging();
+            if (!LogFileManager.IsLoggingInitialized)
+            {
+                /* Detect whether we failed to initialize the log file, and, if so,
+                 then exit gracefully */
+                Console.WriteLine(Resources.FailedToInitializeLogFile);
+                Environment.Exit(Resources.FAILED_TO_INITIALIZE_LOGGING);
+            }
+
+            // If we are here, then logging got set up properly. 
+            // Clear out the garbage the logging subsystem wrote to the console
+            Console.Clear();
+            
+            // Examine the command line for valid inputs, and fill the properties of the
+            // CommandLineInfo object accordingly.
             CommandLineInfo.Instance.ParseCommandLine(args);
 
+            // Take action based on what the user passed on the command line.
             if (!ProcessCommandLine())
             {
                 PrintUsageMessage();
-                Environment.Exit(Resources.FAILED_TO_PROCESS_COMMAND_LINE);
+                Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);
             }
 
+            // If we are here, the program ran successfully.  Exit with a success error code.
             Environment.Exit(Resources.EXIT_SUCCESS);
         }
 

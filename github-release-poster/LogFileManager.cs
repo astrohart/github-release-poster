@@ -1,5 +1,4 @@
-﻿using github_release_poster.Properties;
-using log4net.Config;
+﻿using log4net.Config;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -50,21 +49,8 @@ namespace github_release_poster
         public static void InitializeLogging(bool muteDebugLevelIfReleaseMode = true,
             bool overwrite = true, string configurationFilePathname = "")
         {
-            // Attempt to get a name for the executing application.
-            DebugUtils.ApplicationName = GetDebugApplicationName();
-
-            // If we found a value for the ApplicationName, then initialize the EventLogManager.  The EventLogManager
-            // is a companion component to DebugUtils which also spits out logging to the System Event Log.  This is handy
-            // in the case where the user does not have write access to the C:\ProgramData directory, for example.
-            if (!string.IsNullOrWhiteSpace(DebugUtils.ApplicationName))
-            {
-                EventLogManager.Instance.Initialize(DebugUtils.ApplicationName, EventLogType.Application);
-            }
-
             // write the name of the current class and method we are now entering, into the log
             Console.WriteLine("In LogFileManager.InitializeLogging");
-
-            SetUpDebugUtils(muteDebugLevelIfReleaseMode);
 
             // Check whether the path to the configuration file is blank; or, if it's not blank, whether the specified file actually exists at the path indicated.
             // If the configuration file pathname is blank and/or it does not exist at the path indicated, then call the version of XmlConfigurator.Configure that does
@@ -98,8 +84,11 @@ namespace github_release_poster
             {
                 // if we are here, then the call above did not work, try to load the configuration from the
                 // .exe.config file which may have been included as an embedded resource.
-                IsLoggingInitialized = ConfigureLogFileFromEmbeddedResource();
-                return;
+                if (!ConfigureLogFileFromEmbeddedResource())
+                {
+                    Console.WriteLine("LogFileManager.InitializeLogging: Failed to initialize logging from embedded configuration file.");
+                    return;
+                }
             }
 
             // If we are here, then the required string property, LogFilePath, has a value.  Check to ensure that the
@@ -164,6 +153,44 @@ namespace github_release_poster
 
             // initialization succeeded
             IsLoggingInitialized = true;
+
+            // Set up the Event Log and the DebugUtils objects.
+            // Attempt to get a name for the executing application.
+            DebugUtils.ApplicationName = GetDebugApplicationName();
+
+            // If we found a value for the ApplicationName, then initialize the EventLogManager.  The EventLogManager
+            // is a companion component to DebugUtils which also spits out logging to the System Event Log.  This is handy
+            // in the case where the user does not have write access to the C:\ProgramData directory, for example.
+            if (!string.IsNullOrWhiteSpace(DebugUtils.ApplicationName))
+            {
+                EventLogManager.Instance.Initialize(DebugUtils.ApplicationName, EventLogType.Application);
+            }
+
+            SetUpDebugUtils(muteDebugLevelIfReleaseMode, TODO);
+
+            // done
+        }
+
+        /// <summary>
+        /// Sets up the <see cref="T:github_release_poster.DebugUtils"/> to initialize its functionality.
+        /// </summary>
+        /// <param name="muteDebugLevelIfReleaseMode">If set to true, does not echo any logging statements that are set to <see cref="DebugLevel.Info"/>.</param>
+        /// <param name="noConsole"></param>
+        /// <param name="isLogging">True to activate the functionality of writing to a log file; false to suppress.  Usually used with the <see cref="consoleOnly"/> parameter set to true.</param>
+        /// <param name="consoleOnly">True to only write messages to the console; false to write them both to the console and to the log.</param>
+        /// <param name="verbosity">Zero to suppress every message; greater than zero to echo every message.</param>
+        /// <param name="noConsole">True to totally suppress any output to the console.  Output will be written to any other logging output.</param>
+        public static void SetUpDebugUtils(bool muteDebugLevelIfReleaseMode,
+            bool isLogging = true,
+            bool consoleOnly = false,
+            int verbosity = 1,
+            bool noConsole = false)
+        {
+            DebugUtils.IsLogging = isLogging;
+            DebugUtils.ConsoleOnly = consoleOnly;
+            DebugUtils.NoConsole = noConsole;
+            DebugUtils.Verbosity = verbosity;
+            DebugUtils.MuteDebugLevelIfReleaseMode = muteDebugLevelIfReleaseMode;
         }
 
         /// <summary>
@@ -186,12 +213,11 @@ namespace github_release_poster
             {
                 using (var stream = assembly.GetManifestResourceStream(resourceName))
                 {
-                    var collectionResult = XmlConfigurator.Configure(stream);
-                    if (collectionResult == null || collectionResult.Count == 0)
-                        result = false;
+                    XmlConfigurator.Configure(stream);
                 }
 
-                result = true;
+                // the configuration worked if the LogFilePath property of this class is not empty
+                result = !string.IsNullOrWhiteSpace(LogFilePath);
             }
             catch
             {
@@ -203,45 +229,6 @@ namespace github_release_poster
                 "LogFileManager.ConfigureLogFileFromEmbeddedResource: Done.");
 
             return result;
-        }
-
-        /// <summary>
-        /// Sets up the <see cref="T:github_release_poster.DebugUtils"/> to initialize its functionality.
-        /// </summary>
-        /// <param name="muteDebugLevelIfReleaseMode">If set to true, does not echo any logging statements that are set to <see cref="DebugLevel.Info"/>.</param>
-        /// <param name="isLogging">True to activate the functionality of writing to a log file; false to suppress.  Usually used with the <see cref="consoleOnly"/> parameter set to true.</param>
-        /// <param name="consoleOnly">True to only write messages to the console; false to write them both to the console and to the log.</param>
-        /// <param name="verbosity">Zero to suppress every message; greater than zero to echo every message.</param>
-        public static void SetUpDebugUtils(bool muteDebugLevelIfReleaseMode,
-            bool isLogging = true,
-            bool consoleOnly = false,
-            int verbosity = 1)
-        {
-            DebugUtils.IsLogging = isLogging;
-            DebugUtils.ConsoleOnly = consoleOnly;
-            DebugUtils.Verbosity = verbosity;
-            DebugUtils.MuteDebugLevelIfReleaseMode = muteDebugLevelIfReleaseMode;
-
-            // do not print anything in this method if verbosity is set to anything less than 2
-            if (DebugUtils.Verbosity < 2)
-                return;
-
-            // write the name of the current class and method we are now entering, into the log
-            Console.WriteLine("In LogFileManager.SetUpDebugUtils");
-
-            // Dump the variable DebugUtils.IsLogging to the log
-            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.IsLogging = {0}", DebugUtils.IsLogging);
-
-            // Dump the variable DebugUtils.ConsoleOnly to the log
-            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.ConsoleOnly = {0}", DebugUtils.ConsoleOnly);
-
-            // Dump the variable DebugUtils.Verbosity to the log
-            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.Verbosity = {0}", DebugUtils.Verbosity);
-
-            // Dump the variable DebugUtils.MuteDebugLevelIfReleaseMode to the log
-            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.MuteDebugLevelIfReleaseMode = {0}", DebugUtils.MuteDebugLevelIfReleaseMode);
-
-            Console.WriteLine("LogFileManager.SetUpDebugUtils: Done.");
         }
 
         /// <summary>
@@ -277,7 +264,7 @@ namespace github_release_poster
             try
             {
                 Console.WriteLine(
-                    "LogFileManager.DeleteLogIfExists: Deleting the log file folder '{0}' and all files and folders within it...",
+                    "LogFileManager.DeleteLogIfExists: Deleting the log file folder '{0}' and all files and folders within it, and then re-creating the folder...",
                     LogFileDirectoryName);
 
                 if (Directory.Exists(LogFileDirectoryName))
@@ -285,16 +272,19 @@ namespace github_release_poster
 
                 if (!Directory.Exists(LogFileDirectoryName))
                     Directory.CreateDirectory(LogFileDirectoryName);
+
+                if (Directory.Exists(LogFileDirectoryName))
+                    Console.WriteLine(
+                        "LogFileManager:DeleteLogIfExists: Successfully deleted and re-created the folder '{0}'.",
+                        LogFileDirectoryName);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                // If we are here, do not do anything to prevent the user from still using the
-                // app; this error just means that, for some reason, this app is installed by a user
-                // who does not have write access to the folder in which the log file lives.
-                Console.WriteLine(Resources.APP_HAS_INSUFFICIENT_PERMISSIONS);
+                // dump all the exception info to the log/console
+                DebugUtils.LogException(e);
             }
 
-            // NOTE: We do no logging here since we are dealing with a freshly-emptied log file.
+            Console.WriteLine("LogFileManager.DeleteLogIfExists: Done.");
         }
 
         private static string GetDebugApplicationName()

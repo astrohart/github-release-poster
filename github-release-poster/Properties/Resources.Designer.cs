@@ -79,15 +79,6 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This application has insufficient permissions to run..
-        /// </summary>
-        public static string APP_HAS_INSUFFICIENT_PERMISSIONS {
-            get {
-                return ResourceManager.GetString("APP_HAS_INSUFFICIENT_PERMISSIONS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Authorization.
         /// </summary>
         public static string AuthorizationHeaderName {
@@ -161,6 +152,16 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Int32 similar to -103.
+        /// </summary>
+        public static int FAILED_TO_INITIALIZE_LOGGING {
+            get {
+                object obj = ResourceManager.GetObject("FAILED_TO_INITIALIZE_LOGGING", resourceCulture);
+                return ((int)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Int32 similar to -101.
         /// </summary>
         public static int FAILED_TO_PARSE_COMMAND_LINE {
@@ -186,6 +187,15 @@ namespace github_release_poster.Properties {
         public static string FailedToFormatReleaseJson {
             get {
                 return ResourceManager.GetString("FailedToFormatReleaseJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR: Failed to initialize log file..
+        /// </summary>
+        public static string FailedToInitializeLogFile {
+            get {
+                return ResourceManager.GetString("FailedToInitializeLogFile", resourceCulture);
             }
         }
         

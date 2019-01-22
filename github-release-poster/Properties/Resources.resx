@@ -126,16 +126,14 @@
   <data name="PROGRAM_NAME" xml:space="preserve">
     <value>github-release-poster</value>
   </data>
-  <data name="APP_HAS_INSUFFICIENT_PERMISSIONS" xml:space="preserve">
-    <value>This application has insufficient permissions to run.</value>
-  </data>
   <data name="VersionString" xml:space="preserve">
     <value>{0} version {1}</value>
   </data>
-  <data name="EXIT_SUCCESS" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="EXIT_SUCCESS" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="FAILED_TO_PARSE_COMMAND_LINE" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="FAILED_TO_PARSE_COMMAND_LINE" type="System.Int32, mscorlib">
     <value>-101</value>
   </data>
   <data name="BODY_SWITCH" xml:space="preserve">
@@ -204,7 +202,7 @@
   <data name="USER_ACCESS_TOKEN_SWITCH_USAGE" xml:space="preserve">
     <value>--user-access-token: String specifying the user access token to use with GitHub API.</value>
   </data>
-  <data name="FAILED_TO_PROCESS_COMMAND_LINE" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="FAILED_TO_PROCESS_COMMAND_LINE" type="System.Int32, mscorlib">
     <value>-102</value>
   </data>
   <data name="IS_DRAFT_SWITCH_USAGE" xml:space="preserve">
@@ -309,5 +307,11 @@
   </data>
   <data name="ProcessingReleaseAssets" xml:space="preserve">
     <value>Processing release assets...</value>
+  </data>
+  <data name="FailedToInitializeLogFile" xml:space="preserve">
+    <value>ERROR: Failed to initialize log file.</value>
+  </data>
+  <data name="FAILED_TO_INITIALIZE_LOGGING" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>-103</value>
   </data>
 </root>
