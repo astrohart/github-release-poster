@@ -125,7 +125,7 @@ namespace github_release_poster
             // Check whether the log file directory already exists.  If not, then try to create it.
             FileAndFolderHelper.CreateDirectoryIfNotExists(LogFileDirectoryName);
 
-            // We have to insist that the directory that the log file is in is writeable.  If we can't
+            // We have to insist that the directory that the log file is in is writable.  If we can't
             // get write access to the log file directory, then throw an exception.
             if (!FileAndFolderHelper.IsFolderWritable(LogFileDirectoryName))
             {
@@ -205,7 +205,7 @@ namespace github_release_poster
             DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.DeleteLogIfExists: The file with path contained in 'LogFilePath' was found.");
 
             DebugUtils.WriteLine(DebugLevel.Info,
-                "LogFileManager.DeleteLogIfExists: Checking whether the folder '{0}' is writeable...",
+                "LogFileManager.DeleteLogIfExists: Checking whether the folder '{0}' is writable...",
                 Path.GetDirectoryName(LogFilePath));
 
             if (!FileAndFolderHelper.IsFolderWritable(Path.GetDirectoryName(LogFilePath)))
@@ -213,7 +213,7 @@ namespace github_release_poster
                 // If we cannot write to the folder where the log file to be deleted sits in, then Heaven help us!  However the software
                 // should try to work at all costs, so this method should just silently fail in this case.
                 DebugUtils.WriteLine(DebugLevel.Error,
-                    "LogFileManager.DeleteLogIfExists: The folder '{0}' is not writeable, so we can't delete the log file '{1}' as requested.  Nothing to do.",
+                    "LogFileManager.DeleteLogIfExists: The folder '{0}' is not writable, so we can't delete the log file '{1}' as requested.  Nothing to do.",
                     Path.GetDirectoryName(LogFilePath), LogFilePath);
 
                 DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.DeleteLogIfExists: Done.");
@@ -235,6 +235,9 @@ namespace github_release_poster
             }
             catch(Exception)
             {
+                // If we are here, do not do anything to prevent the user from still using the 
+                // app; this error just means that, for some reason, this app is installed by a user
+                // who does not have write access to the folder in which the log file lives.
                 Console.WriteLine(Resources.APP_HAS_INSUFFICIENT_PERMISSIONS);
             }
 
