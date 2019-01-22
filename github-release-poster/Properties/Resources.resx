@@ -344,4 +344,7 @@
   <data name="ZipFileContentType" xml:space="preserve">
     <value>application/zip</value>
   </data>
+  <data name="UploadAssetURL" xml:space="preserve">
+    <value>{0}?name={1}&amp;label={2}</value>
+  </data>
 </root>

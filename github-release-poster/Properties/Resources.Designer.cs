@@ -578,6 +578,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}?name={1}&amp;label={2}.
+        /// </summary>
+        public static string UploadAssetURL {
+            get {
+                return ResourceManager.GetString("UploadAssetURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Usage:.
         /// </summary>
         public static string Usage {

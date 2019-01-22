@@ -2,6 +2,7 @@
 using RestSharp;
 using System;
 using System.IO;
+using System.Runtime.Versioning;
 
 namespace github_release_poster
 {
@@ -82,6 +83,11 @@ namespace github_release_poster
 
             Console.WriteLine(Resources.ProcessingReleaseAssets);
 
+            request = new RestRequest(Method.POST);
+            request.AddHeader("cache-control", "no-cache");
+            request.AddHeader("User-Agent", "test app");
+            request.AddHeader("Authorization", $"token {userAccessToken}");
+
             // process the assets
             // If the user has set shouldNotZip to false, zip up the release assets.
             if (!shouldNotZip)
@@ -96,12 +102,10 @@ namespace github_release_poster
                 }
 
                 client = new RestClient(
-                    $"{responseData.assets_url}?name={Path.GetFileName(outputZipFilePath)}&label={Path.GetFileName(outputZipFilePath)}");
-                request = new RestRequest(Method.POST);
-                request.AddHeader("cache-control", "no-cache");
+                    string.Format(Resources.UploadAssetURL, responseData.assets_url, 
+                        Path.GetFileName(outputZipFilePath), Path.GetFileName(outputZipFilePath)));
+
                 request.AddHeader("Content-Type", Resources.ZipFileContentType);
-                request.AddHeader("User-Agent", "test app");
-                request.AddHeader("Authorization", $"token {userAccessToken}");
                 request.AddParameter(Resources.ZipFileContentType, 
                     File.ReadAllBytes(outputZipFilePath), ParameterType.RequestBody);
                 response = client.Execute(request);
@@ -110,7 +114,7 @@ namespace github_release_poster
             }
             else
             {
-                // TODO: Add code here to upload files one by one to GitHub
+                foreach (var assetFile in .)
             }
 
             // done
