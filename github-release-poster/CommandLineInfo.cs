@@ -142,9 +142,6 @@ namespace github_release_poster
 
             var isError = false;
 
-            /* If the user specifies the --no-zip flag on the command line, set the ShouldNotZip property to TRUE */
-            ShouldNotZip = args.Contains(Resources.NO_ZIP_SWITCH);
-
             Body = GetSwitchValue(args, Resources.BODY_SWITCH);
             if (!isError && !string.IsNullOrWhiteSpace(Body))
             {
@@ -247,9 +244,24 @@ namespace github_release_poster
                 Console.WriteLine(Resources.UsingRepoOwner, RepoOwner);
             }
 
+            /* If the user specifies the --no-zip flag on the command line, set the ShouldNotZip property to TRUE */
+            ShouldNotZip = args.Contains(Resources.NO_ZIP_SWITCH);
+
+            Console.WriteLine(ShouldNotZip
+                ? Resources.NotZippingReleaseAssets
+                : Resources.ZippingReleaseAssets);
+
             IsDraft = args.Contains(Resources.IS_DRAFT_SWITCH);
 
+            Console.WriteLine(IsDraft
+                ? Resources.ReleaseWillBeMarkedDraft
+                : Resources.ReleaseWillNotBeMarkedDraft);
+
             IsPreRelease = args.Contains(Resources.IS_PRE_RELEASE_SWITCH);
+
+            Console.WriteLine(IsPreRelease
+                ? Resources.ReleaseWillBeMarkedPreRelease
+                : Resources.ReleaseWillNotBeMarkedPreRelease);
 
             if (isError)
                 Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);

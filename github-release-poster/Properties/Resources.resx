@@ -314,4 +314,22 @@
   <data name="FAILED_TO_INITIALIZE_LOGGING" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>-103</value>
   </data>
+  <data name="ReleaseWillBeMarkedPreRelease" xml:space="preserve">
+    <value>This release is being marked as Pre-Release.</value>
+  </data>
+  <data name="ReleaseWillNotBeMarkedPreRelease" xml:space="preserve">
+    <value>This release is NOT being marked as Pre-Release.</value>
+  </data>
+  <data name="ReleaseWillNotBeMarkedDraft" xml:space="preserve">
+    <value>This release is NOT being marked as Draft.</value>
+  </data>
+  <data name="ReleaseWillBeMarkedDraft" xml:space="preserve">
+    <value>This release is being marked as Draft.</value>
+  </data>
+  <data name="NotZippingReleaseAssets" xml:space="preserve">
+    <value>This release's assets will NOT be zipped up prior to upload.</value>
+  </data>
+  <data name="ZippingReleaseAssets" xml:space="preserve">
+    <value>This release's assets will be placed in a ZIP file prior to upload.</value>
+  </data>
 </root>

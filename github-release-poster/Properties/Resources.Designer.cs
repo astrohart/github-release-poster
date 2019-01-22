@@ -326,6 +326,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We are NOT zipping the release assets, but publishing all files in release dir one-at-a-time..
+        /// </summary>
+        public static string NotZippingReleaseAssets {
+            get {
+                return ResourceManager.GetString("NotZippingReleaseAssets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ERROR: No output path specified for the release asset ZIP file..
         /// </summary>
         public static string OutputZipFilePathBlank {
@@ -394,6 +403,42 @@ namespace github_release_poster.Properties {
         public static string ReleaseAssetsComeFromFolder {
             get {
                 return ResourceManager.GetString("ReleaseAssetsComeFromFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This release is being marked as Draft..
+        /// </summary>
+        public static string ReleaseWillBeMarkedDraft {
+            get {
+                return ResourceManager.GetString("ReleaseWillBeMarkedDraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This release is being marked as Pre-Release..
+        /// </summary>
+        public static string ReleaseWillBeMarkedPreRelease {
+            get {
+                return ResourceManager.GetString("ReleaseWillBeMarkedPreRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This release is NOT being marked as Draft..
+        /// </summary>
+        public static string ReleaseWillNotBeMarkedDraft {
+            get {
+                return ResourceManager.GetString("ReleaseWillNotBeMarkedDraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This release is NOT being marked as Pre-Release..
+        /// </summary>
+        public static string ReleaseWillNotBeMarkedPreRelease {
+            get {
+                return ResourceManager.GetString("ReleaseWillNotBeMarkedPreRelease", resourceCulture);
             }
         }
         
@@ -647,6 +692,15 @@ namespace github_release_poster.Properties {
         public static string ZipOutputFolderBlank {
             get {
                 return ResourceManager.GetString("ZipOutputFolderBlank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We are packaging the release assets in a ZIP file before publishing..
+        /// </summary>
+        public static string ZippingReleaseAssets {
+            get {
+                return ResourceManager.GetString("ZippingReleaseAssets", resourceCulture);
             }
         }
     }

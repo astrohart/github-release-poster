@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System;
 using System.Linq;
+using github_release_poster.Properties;
 
 namespace github_release_poster_tests
 {
@@ -87,7 +88,7 @@ namespace github_release_poster_tests
             Assert.IsTrue(ValidFullTestingArgs.Any());
 
             Assert.IsTrue(
-                CommandLineInfo.Instance.ParseCommandLine(ValidTestingArgs));
+                CommandLineInfo.Instance.ParseCommandLine(ValidFullTestingArgs));
 
             Assert.IsTrue(CommandLineInfo.Instance.WasCommandLineParsed);
         }
