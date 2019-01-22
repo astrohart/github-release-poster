@@ -1,31 +1,34 @@
 ﻿using System;
+using System.Linq;
 using github_release_poster;
 using NUnit.Framework;
-using System.Linq;
 
 namespace github_release_poster_tests
 {
-    /// <summary>
-    /// This file would otherwise be named CommandLineInfoTests but this is to avoid pushing
-    /// a file to the repo that has a valid user access token embedded in it
-    /// </summary>
     [TestFixture]
-    public class AltCommandLineInfoTests
+    public class CommandLineInfoTests
     {
         /// <summary>
         /// Valid command-line arguments for testing.  Since we have sensitive information (i.e., my user access token) in this file,
         /// it will not be pushed to the repo in the cloud.
         /// </summary>
-        /// <remarks>Represents the argument string --name Testing --release-asset-dir "C:\Users\ENS Brian Hart\source\repos\github-release-poster\github-release-poster\bin\x64\Debug" --tag-name Testing --target-branch master --user-access-token &lt;token&gt; --repo-name github-releasse-poster --repo-owner astrohart</remarks>
+        /// <remarks>Represents the argument string --name Testing --release-asset-dir "C:\Users\ENS Brian Hart\source\repos\github-release-poster\github-release-poster\bin\x64\Debug" --tag-name Testing --target-branch master --user-access-token &lt;guid with no dashes&gt; --repo-name github-release-poster --repo-owner astrohart</remarks>
         public static string[] ValidTestingArgs { get; } =
         {
-            "--repo-owner astrohart",
-            "--repo-name github-release-poster",
-            "--user-access-token <token>",
-            "--target-branch master",
-            $"--tag-name {Guid.NewGuid()}",
-            @"--release-asset-dir ""C:\Users\ENS Brian Hart\source\repos\github-release-poster\github-release-poster\bin\x64\Debug""",
-            $"--name {Guid.NewGuid()}"
+            "--repo-owner",
+            "astrohart",
+            "--repo-name",
+            " github-release-poster",
+            "--user-access-token",
+            $"{Guid.NewGuid().ToString().Replace("-", string.Empty)}",
+            "--target-branch",
+            "master",
+            $"--tag-name",
+            $"{Guid.NewGuid()}",
+            "--release-asset-dir ",
+            @"C:\Users\ENS Brian Hart\source\repos\github-release-poster\github-release-poster\bin\x64\Debug",
+            "--name",
+            $"{Guid.NewGuid()}"
         };
 
         /// <summary>
