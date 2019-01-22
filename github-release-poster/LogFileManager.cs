@@ -1,9 +1,9 @@
-﻿using System;
+﻿using github_release_poster.Properties;
+using log4net.Config;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using github_release_poster.Properties;
-using log4net.Config;
 
 namespace github_release_poster
 {
@@ -12,6 +12,12 @@ namespace github_release_poster
     /// </summary>
     public static class LogFileManager
     {
+        /// <summary>
+        /// Gets a value indicating whether this <see cref="T:github_release_poster.LogFileManagers"/> instance
+        /// has been initialized properly.
+        /// </summary>
+        public static bool IsLoggingInitialized { get; private set; }
+
         /// <summary>
         /// Gets the name of the directory that the log file is located in.
         /// </summary>
@@ -38,6 +44,8 @@ namespace github_release_poster
         /// <param name="muteDebugLevelIfReleaseMode">Set to true if we should not write out "DEBUG" messages to the log file when in the NewRelease mode.  Set to false if all messages should always be logged.</param>
         /// <param name="overwrite">Overwrites any existing logs for the application with the latest logging sent out by this instance.</param>
         /// <param name="configurationFilePathname">Specifies the path to the configuration file to be utilized for initializing log4net.  If blank, the system attempts to utilize the default App.config file.</param>
+        /// <remarks>Upon completion, this method sets the <see cref="IsLoggingInitialized"/> property.  Applications should check the value of this
+        /// property to determine whether logging succeeded.</remarks>
         public static void InitializeLogging(bool muteDebugLevelIfReleaseMode = true,
             bool overwrite = true, string configurationFilePathname = "")
         {
@@ -53,7 +61,7 @@ namespace github_release_poster
             }
 
             // write the name of the current class and method we are now entering, into the log
-            DebugUtils.WriteLine(DebugLevel.Info, "In LogFileManager.InitializeLogging");
+            Console.WriteLine("In LogFileManager.InitializeLogging");
 
             SetUpDebugUtils(muteDebugLevelIfReleaseMode);
 
@@ -69,7 +77,10 @@ namespace github_release_poster
                 if (!string.IsNullOrWhiteSpace(configurationFilePathname)  // only do this check for a non-blank file name.
                     && !File.Exists(configurationFilePathname))
                 {
-                    throw new FileNotFoundException($"The file '{configurationFilePathname}' was not found.\n\nThe application needs this file in order to continue.");
+                    Console.WriteLine(
+                        $"The file '{configurationFilePathname}' was not found.\n\nThe application needs this file in order to continue.");
+                    IsLoggingInitialized = false;
+                    return;
                 }
 
                 XmlConfigurator.Configure();
@@ -85,6 +96,7 @@ namespace github_release_poster
             if (string.IsNullOrWhiteSpace(LogFilePath))
             {
                 // Failed to initialize logging.
+                IsLoggingInitialized = false;
                 return;
             }
 
@@ -94,6 +106,8 @@ namespace github_release_poster
             if (string.IsNullOrWhiteSpace(LogFileDirectoryName))
                 return;
 
+            // Check whether the parent folder of the folder in which the log file will live, is also writable by the
+            // currently-logged-in user
             var directoryInfo = new DirectoryInfo(LogFileDirectoryName).Parent;
             if (directoryInfo != null)
             {
@@ -103,22 +117,25 @@ namespace github_release_poster
                     .FullName;
 
                 // Dump the variable logFileDirectoryParent to the log
-                DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.InitializeLogging: logFileDirectoryParent = '{0}'", logFileDirectoryParent);
+                Console.WriteLine("LogFileManager.InitializeLogging: logFileDirectoryParent = '{0}'", logFileDirectoryParent);
 
-                DebugUtils.WriteLine(DebugLevel.Info,
+                Console.WriteLine(
                     "LogFileManager.InitializeLogging: Checking whether the user has write-level access to the folder '{0}'...",
                     logFileDirectoryParent);
 
                 // Check if the user has write access to the parent directory of the log file.
                 if (!FileAndFolderHelper.IsFolderWritable(logFileDirectoryParent))
                 {
-                    DebugUtils.WriteLine(DebugLevel.Error,
+                    Console.WriteLine(
                         @"LogFileManager.InitializeLogging: The user '{0}\{1}' does not have write-level access to the folder '{2}'.",
                         Environment.UserDomainName,
                         Environment.UserName,
                         logFileDirectoryParent);
 
-                    throw new UnauthorizedAccessException($"The current user does not have write permissions to the directory '{logFileDirectoryParent}'.");
+                    // Mark the IsLoggingInitialized property to false
+                    IsLoggingInitialized = false;
+
+                    return;
                 }
             }
 
@@ -129,15 +146,22 @@ namespace github_release_poster
             // get write access to the log file directory, then throw an exception.
             if (!FileAndFolderHelper.IsFolderWritable(LogFileDirectoryName))
             {
-                throw new UnauthorizedAccessException(
+                Console.WriteLine(
                     $"The current user does not have write permissions to the directory '{LogFileDirectoryName}'.");
+
+                IsLoggingInitialized = false;
             }
 
             // Set options on the file appender of the logging system to minimize locking issues
             FileAppenderConfigurator.SetMinimalLock(FileAppenderManager.GetFirstAppender());
 
+            // If the overwrite parameter's value is set to true, then overwrite the log -- that is,
+            // delete any existing log file that may already exist.
             if (overwrite)
                 DeleteLogIfExists();
+
+            // initialization succeeded
+            IsLoggingInitialized = true;
         }
 
         /// <summary>
@@ -162,21 +186,21 @@ namespace github_release_poster
                 return;
 
             // write the name of the current class and method we are now entering, into the log
-            DebugUtils.WriteLine(DebugLevel.Info, "In LogFileManager.SetUpDebugUtils");
+            Console.WriteLine("In LogFileManager.SetUpDebugUtils");
 
             // Dump the variable DebugUtils.IsLogging to the log
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.SetUpDebugUtils: DebugUtils.IsLogging = {0}", DebugUtils.IsLogging);
+            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.IsLogging = {0}", DebugUtils.IsLogging);
 
             // Dump the variable DebugUtils.ConsoleOnly to the log
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.SetUpDebugUtils: DebugUtils.ConsoleOnly = {0}", DebugUtils.ConsoleOnly);
+            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.ConsoleOnly = {0}", DebugUtils.ConsoleOnly);
 
             // Dump the variable DebugUtils.Verbosity to the log
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.SetUpDebugUtils: DebugUtils.Verbosity = {0}", DebugUtils.Verbosity);
+            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.Verbosity = {0}", DebugUtils.Verbosity);
 
             // Dump the variable DebugUtils.MuteDebugLevelIfReleaseMode to the log
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.SetUpDebugUtils: DebugUtils.MuteDebugLevelIfReleaseMode = {0}", DebugUtils.MuteDebugLevelIfReleaseMode);
+            Console.WriteLine("LogFileManager.SetUpDebugUtils: DebugUtils.MuteDebugLevelIfReleaseMode = {0}", DebugUtils.MuteDebugLevelIfReleaseMode);
 
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.SetUpDebugUtils: Done.");
+            Console.WriteLine("LogFileManager.SetUpDebugUtils: Done.");
         }
 
         /// <summary>
@@ -185,57 +209,45 @@ namespace github_release_poster
         private static void DeleteLogIfExists()
         {
             // write the name of the current class and method we are now entering, into the log
-            DebugUtils.WriteLine(DebugLevel.Info, "In LogFileManager.DeleteLogIfExists");
+            Console.WriteLine("In LogFileManager.DeleteLogIfExists");
 
-            // Dump the variable LogFilePath to the log
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.DeleteLogIfExists: LogFilePath = '{0}'", LogFilePath);
-
-            DebugUtils.WriteLine(DebugLevel.Info,
-                "LogFileManager.DeleteLogIfExists: Checking whether the file with path contained in 'LogFilePath' exists...");
-
-            if (!File.Exists(LogFilePath))
-            {
-                DebugUtils.WriteLine(DebugLevel.Info,
-                    "LogFileManager.DeleteLogIfExists: The log file '{0}' does not exist.  Nothing to do.",
-                    LogFilePath);
-
-                return;
-            }
-
-            DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.DeleteLogIfExists: The file with path contained in 'LogFilePath' was found.");
-
-            DebugUtils.WriteLine(DebugLevel.Info,
+            Console.WriteLine(
                 "LogFileManager.DeleteLogIfExists: Checking whether the folder '{0}' is writable...",
-                Path.GetDirectoryName(LogFilePath));
+                LogFileDirectoryName);
 
-            if (!FileAndFolderHelper.IsFolderWritable(Path.GetDirectoryName(LogFilePath)))
+            if (!FileAndFolderHelper.IsFolderWritable(LogFileDirectoryName))
             {
                 // If we cannot write to the folder where the log file to be deleted sits in, then Heaven help us!  However the software
                 // should try to work at all costs, so this method should just silently fail in this case.
-                DebugUtils.WriteLine(DebugLevel.Error,
+                Console.WriteLine(
                     "LogFileManager.DeleteLogIfExists: The folder '{0}' is not writable, so we can't delete the log file '{1}' as requested.  Nothing to do.",
-                    Path.GetDirectoryName(LogFilePath), LogFilePath);
+                    LogFileDirectoryName, LogFilePath);
 
-                DebugUtils.WriteLine(DebugLevel.Info, "LogFileManager.DeleteLogIfExists: Done.");
+                Console.WriteLine(
+                    "LogFileManager.DeleteLogIfExists: Done.");
 
                 return;
             }
 
-            DebugUtils.WriteLine(DebugLevel.Info,
+            Console.WriteLine(
                 "LogFileManager.DeleteLogIfExists: The folder '{0}' is writable, so therefore we can delete the log file '{1}'.",
-                Path.GetDirectoryName(LogFilePath), LogFilePath);
+                LogFileDirectoryName, LogFilePath);
 
             try
             {
-                DebugUtils.WriteLine(DebugLevel.Info,
-                    "LogFileManager.DeleteLogIfExists: Deleting the log file '{0}'...",
-                    LogFilePath);
+                Console.WriteLine(
+                    "LogFileManager.DeleteLogIfExists: Deleting the log file folder '{0}' and all files and folders within it...",
+                    LogFileDirectoryName);
 
-                File.Delete(LogFilePath);
+                if (Directory.Exists(LogFileDirectoryName))
+                    Directory.Delete(LogFileDirectoryName, true);
+
+                if (!Directory.Exists(LogFileDirectoryName))
+                    Directory.CreateDirectory(LogFileDirectoryName);
             }
-            catch(Exception)
+            catch (Exception)
             {
-                // If we are here, do not do anything to prevent the user from still using the 
+                // If we are here, do not do anything to prevent the user from still using the
                 // app; this error just means that, for some reason, this app is installed by a user
                 // who does not have write access to the folder in which the log file lives.
                 Console.WriteLine(Resources.APP_HAS_INSUFFICIENT_PERMISSIONS);

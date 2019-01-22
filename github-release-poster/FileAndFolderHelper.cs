@@ -12,9 +12,6 @@ namespace github_release_poster
     {
         public static void ClearTempFileDir()
         {
-            // write the name of the current class and method we are now entering, into the log
-            DebugUtils.WriteLine(DebugLevel.Info, "In FileAndFolderHelper.ClearTempFileDir");
-
             try
             {
                 var psi = new ProcessStartInfo
@@ -27,7 +24,7 @@ namespace github_release_poster
                 };
 
                 var proc = Process.Start(psi);
-                proc.WaitForExit();
+                proc?.WaitForExit();
             }
             catch
             {
