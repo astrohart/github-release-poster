@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using github_release_poster.Properties;
 using log4net.Config;
 
 namespace github_release_poster
@@ -216,7 +217,7 @@ namespace github_release_poster
             }
 
             DebugUtils.WriteLine(DebugLevel.Info,
-                "LogFileManager.DeleteLogIfExists: The folder '{0}' is writeable, so therefore we can delete the log file '{1}'.",
+                "LogFileManager.DeleteLogIfExists: The folder '{0}' is writable, so therefore we can delete the log file '{1}'.",
                 Path.GetDirectoryName(LogFilePath), LogFilePath);
 
             try

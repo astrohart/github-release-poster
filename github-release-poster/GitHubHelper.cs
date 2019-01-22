@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using github_release_poster.Properties;
 using RestSharp;
 
 namespace github_release_poster

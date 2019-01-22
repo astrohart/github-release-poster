@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using github_release_poster.Properties;
 
 namespace github_release_poster
 {

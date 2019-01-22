@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using github_release_poster.Properties;
 
 namespace github_release_poster
 {

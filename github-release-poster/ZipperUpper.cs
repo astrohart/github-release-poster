@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using github_release_poster.Properties;
 using ICSharpCode.SharpZipLib.Zip;
 
 namespace github_release_poster

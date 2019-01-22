@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using github_release_poster.Properties;
 using log4net;
 
 namespace github_release_poster
