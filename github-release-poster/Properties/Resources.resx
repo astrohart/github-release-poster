@@ -311,7 +311,7 @@
   <data name="FailedToInitializeLogFile" xml:space="preserve">
     <value>ERROR: Failed to initialize log file.</value>
   </data>
-  <data name="FAILED_TO_INITIALIZE_LOGGING" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <data name="FAILED_TO_INITIALIZE_LOGGING" type="System.Int32, mscorlib">
     <value>-103</value>
   </data>
   <data name="ReleaseWillBeMarkedPreRelease" xml:space="preserve">
