@@ -66,6 +66,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AltCommandLineInfoTests.cs" />
     <Compile Include="CommandLineInfoTests.cs" />
     <Compile Include="LogFileManagerTests.cs" />
     <Compile Include="ZipperUpperTests.cs" />

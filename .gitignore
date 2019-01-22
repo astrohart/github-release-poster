@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /packages
+/github-release-poster-tests/CommandLineInfoTests.cs
