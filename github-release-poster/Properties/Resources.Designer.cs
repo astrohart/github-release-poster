@@ -22,7 +22,7 @@ namespace github_release_poster.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace github_release_poster.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("github_release_poster.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace github_release_poster.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Accept.
         /// </summary>
-        internal static string AcceptHeaderName {
+        public static string AcceptHeaderName {
             get {
                 return ResourceManager.GetString("AcceptHeaderName", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to NOTE: All switches are case-sensitive.  The contents of the switches aren&apos;t unless otherwise noted..
         /// </summary>
-        internal static string AllSwitchesCaseSensitive {
+        public static string AllSwitchesCaseSensitive {
             get {
                 return ResourceManager.GetString("AllSwitchesCaseSensitive", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to This application has insufficient permissions to run..
         /// </summary>
-        internal static string APP_HAS_INSUFFICIENT_PERMISSIONS {
+        public static string APP_HAS_INSUFFICIENT_PERMISSIONS {
             get {
                 return ResourceManager.GetString("APP_HAS_INSUFFICIENT_PERMISSIONS", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Authorization.
         /// </summary>
-        internal static string AuthorizationHeaderName {
+        public static string AuthorizationHeaderName {
             get {
                 return ResourceManager.GetString("AuthorizationHeaderName", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --body.
         /// </summary>
-        internal static string BODY_SWITCH {
+        public static string BODY_SWITCH {
             get {
                 return ResourceManager.GetString("BODY_SWITCH", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --body: Text body for the release (optional)..
         /// </summary>
-        internal static string BODY_SWITCH_USAGE {
+        public static string BODY_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("BODY_SWITCH_USAGE", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to cache-control.
         /// </summary>
-        internal static string CacheControlHeaderName {
+        public static string CacheControlHeaderName {
             get {
                 return ResourceManager.GetString("CacheControlHeaderName", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to https://api.github.com/repos/astrohart/NetworkKeeper/releases.
         /// </summary>
-        internal static string CreateReleaseApiPostURL {
+        public static string CreateReleaseApiPostURL {
             get {
                 return ResourceManager.GetString("CreateReleaseApiPostURL", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Default target branch is &apos;master&apos;..
         /// </summary>
-        internal static string DefaultTargetBranchIsMaster {
+        public static string DefaultTargetBranchIsMaster {
             get {
                 return ResourceManager.GetString("DefaultTargetBranchIsMaster", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {0}\n\t{1}.
         /// </summary>
-        internal static string ExceptionMessageFormat {
+        public static string ExceptionMessageFormat {
             get {
                 return ResourceManager.GetString("ExceptionMessageFormat", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Int32 similar to 0.
         /// </summary>
-        internal static int EXIT_SUCCESS {
+        public static int EXIT_SUCCESS {
             get {
                 object obj = ResourceManager.GetObject("EXIT_SUCCESS", resourceCulture);
                 return ((int)(obj));
@@ -163,7 +163,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Int32 similar to -101.
         /// </summary>
-        internal static int FAILED_TO_PARSE_COMMAND_LINE {
+        public static int FAILED_TO_PARSE_COMMAND_LINE {
             get {
                 object obj = ResourceManager.GetObject("FAILED_TO_PARSE_COMMAND_LINE", resourceCulture);
                 return ((int)(obj));
@@ -173,7 +173,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Int32 similar to -102.
         /// </summary>
-        internal static int FAILED_TO_PROCESS_COMMAND_LINE {
+        public static int FAILED_TO_PROCESS_COMMAND_LINE {
             get {
                 object obj = ResourceManager.GetObject("FAILED_TO_PROCESS_COMMAND_LINE", resourceCulture);
                 return ((int)(obj));
@@ -183,7 +183,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ERROR: Failed to format the JSON of the create-release request body..
         /// </summary>
-        internal static string FailedToFormatReleaseJson {
+        public static string FailedToFormatReleaseJson {
             get {
                 return ResourceManager.GetString("FailedToFormatReleaseJson", resourceCulture);
             }
@@ -192,7 +192,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ERROR: Could not package release for posting..
         /// </summary>
-        internal static string FailedToPackageReleaseForPosting {
+        public static string FailedToPackageReleaseForPosting {
             get {
                 return ResourceManager.GetString("FailedToPackageReleaseForPosting", resourceCulture);
             }
@@ -201,7 +201,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Failed to validate release metadata..
         /// </summary>
-        internal static string FailedValidateReleaseMetadata {
+        public static string FailedValidateReleaseMetadata {
             get {
                 return ResourceManager.GetString("FailedValidateReleaseMetadata", resourceCulture);
             }
@@ -210,7 +210,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to application/vnd.github.v3.raw.
         /// </summary>
-        internal static string GitHubApiV3Accept {
+        public static string GitHubApiV3Accept {
             get {
                 return ResourceManager.GetString("GitHubApiV3Accept", resourceCulture);
             }
@@ -219,7 +219,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --is-draft.
         /// </summary>
-        internal static string IS_DRAFT_SWITCH {
+        public static string IS_DRAFT_SWITCH {
             get {
                 return ResourceManager.GetString("IS_DRAFT_SWITCH", resourceCulture);
             }
@@ -228,7 +228,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --is-draft: Specify this switch to mark this release as a draft.  Leave this switch off to not do so..
         /// </summary>
-        internal static string IS_DRAFT_SWITCH_USAGE {
+        public static string IS_DRAFT_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("IS_DRAFT_SWITCH_USAGE", resourceCulture);
             }
@@ -237,7 +237,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --is-pre-release.
         /// </summary>
-        internal static string IS_PRE_RELEASE_SWITCH {
+        public static string IS_PRE_RELEASE_SWITCH {
             get {
                 return ResourceManager.GetString("IS_PRE_RELEASE_SWITCH", resourceCulture);
             }
@@ -246,7 +246,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --is-pre-release: Specify this switch to mark this release as pre-release; leave it off to not do so..
         /// </summary>
-        internal static string IS_PRE_RELEASE_SWITCH_USAGE {
+        public static string IS_PRE_RELEASE_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("IS_PRE_RELEASE_SWITCH_USAGE", resourceCulture);
             }
@@ -255,7 +255,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The release asset folder &apos;{0}&apos; has been located..
         /// </summary>
-        internal static string LocatedReleaseAssetDirSuccessfully {
+        public static string LocatedReleaseAssetDirSuccessfully {
             get {
                 return ResourceManager.GetString("LocatedReleaseAssetDirSuccessfully", resourceCulture);
             }
@@ -264,7 +264,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to master.
         /// </summary>
-        internal static string MASTER_BRANCH {
+        public static string MASTER_BRANCH {
             get {
                 return ResourceManager.GetString("MASTER_BRANCH", resourceCulture);
             }
@@ -273,7 +273,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --name.
         /// </summary>
-        internal static string NAME_SWITCH {
+        public static string NAME_SWITCH {
             get {
                 return ResourceManager.GetString("NAME_SWITCH", resourceCulture);
             }
@@ -282,7 +282,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --name: String containing the name of this release.  Surround with quotes if it contains spaces..
         /// </summary>
-        internal static string NAME_SWITCH_USAGE {
+        public static string NAME_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("NAME_SWITCH_USAGE", resourceCulture);
             }
@@ -291,7 +291,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --no-zip.
         /// </summary>
-        internal static string NO_ZIP_SWITCH {
+        public static string NO_ZIP_SWITCH {
             get {
                 return ResourceManager.GetString("NO_ZIP_SWITCH", resourceCulture);
             }
@@ -300,7 +300,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --no-zip: Specify this flag on the command line to turn off the automatic ZIPping of release assets..
         /// </summary>
-        internal static string NO_ZIP_SWITCH_USAGE {
+        public static string NO_ZIP_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("NO_ZIP_SWITCH_USAGE", resourceCulture);
             }
@@ -309,7 +309,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to no-cache.
         /// </summary>
-        internal static string NoCacheHeader {
+        public static string NoCacheHeader {
             get {
                 return ResourceManager.GetString("NoCacheHeader", resourceCulture);
             }
@@ -318,7 +318,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ERROR: No output path specified for the release asset ZIP file..
         /// </summary>
-        internal static string OutputZipFilePathBlank {
+        public static string OutputZipFilePathBlank {
             get {
                 return ResourceManager.GetString("OutputZipFilePathBlank", resourceCulture);
             }
@@ -327,7 +327,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Posting release &apos;{0}&apos; to repository &apos;{1}&apos;....
         /// </summary>
-        internal static string PostingReleaseToWhichRepo {
+        public static string PostingReleaseToWhichRepo {
             get {
                 return ResourceManager.GetString("PostingReleaseToWhichRepo", resourceCulture);
             }
@@ -336,7 +336,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Processing release assets....
         /// </summary>
-        internal static string ProcessingReleaseAssets {
+        public static string ProcessingReleaseAssets {
             get {
                 return ResourceManager.GetString("ProcessingReleaseAssets", resourceCulture);
             }
@@ -345,7 +345,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to github-release-poster.
         /// </summary>
-        internal static string PROGRAM_NAME {
+        public static string PROGRAM_NAME {
             get {
                 return ResourceManager.GetString("PROGRAM_NAME", resourceCulture);
             }
@@ -354,7 +354,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --release-asset-dir.
         /// </summary>
-        internal static string RELEASE_ASSET_DIR_SWITCH {
+        public static string RELEASE_ASSET_DIR_SWITCH {
             get {
                 return ResourceManager.GetString("RELEASE_ASSET_DIR_SWITCH", resourceCulture);
             }
@@ -363,7 +363,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --release-asset-dir: Path to directory containing the assets for this release..
         /// </summary>
-        internal static string RELEASE_ASSET_DIR_SWITCH_USAGE {
+        public static string RELEASE_ASSET_DIR_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("RELEASE_ASSET_DIR_SWITCH_USAGE", resourceCulture);
             }
@@ -372,7 +372,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The release asset directory &apos;{0}&apos; could not be located.  Please check whether the directory exists..
         /// </summary>
-        internal static string ReleaseAssetDirNotFound {
+        public static string ReleaseAssetDirNotFound {
             get {
                 return ResourceManager.GetString("ReleaseAssetDirNotFound", resourceCulture);
             }
@@ -381,7 +381,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Release assets come from folder &apos;{0}&apos;..
         /// </summary>
-        internal static string ReleaseAssetsComeFromFolder {
+        public static string ReleaseAssetsComeFromFolder {
             get {
                 return ResourceManager.GetString("ReleaseAssetsComeFromFolder", resourceCulture);
             }
@@ -390,7 +390,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --repo-name.
         /// </summary>
-        internal static string REPO_NAME_SWITCH {
+        public static string REPO_NAME_SWITCH {
             get {
                 return ResourceManager.GetString("REPO_NAME_SWITCH", resourceCulture);
             }
@@ -399,7 +399,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --repo-name &lt;name&gt;: Name of the GitHub repository to which the release should be posted..
         /// </summary>
-        internal static string REPO_NAME_SWITCH_USAGE {
+        public static string REPO_NAME_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("REPO_NAME_SWITCH_USAGE", resourceCulture);
             }
@@ -408,7 +408,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --repo-owner.
         /// </summary>
-        internal static string REPO_OWNER_SWITCH {
+        public static string REPO_OWNER_SWITCH {
             get {
                 return ResourceManager.GetString("REPO_OWNER_SWITCH", resourceCulture);
             }
@@ -417,7 +417,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --repo-owner: GitHub username of the owner of the repository to which the release should be posted..
         /// </summary>
-        internal static string REPO_OWNER_SWITCH_USAGE {
+        public static string REPO_OWNER_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("REPO_OWNER_SWITCH_USAGE", resourceCulture);
             }
@@ -426,7 +426,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Sending HTTP POST request to create release &apos;{0}&apos;....
         /// </summary>
-        internal static string SendingPostRequestToCreateRelease {
+        public static string SendingPostRequestToCreateRelease {
             get {
                 return ResourceManager.GetString("SendingPostRequestToCreateRelease", resourceCulture);
             }
@@ -435,7 +435,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to The switch &apos;{0}&apos; is required..
         /// </summary>
-        internal static string SwitchRequired {
+        public static string SwitchRequired {
             get {
                 return ResourceManager.GetString("SwitchRequired", resourceCulture);
             }
@@ -444,7 +444,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --tag-name.
         /// </summary>
-        internal static string TAG_NAME_SWITCH {
+        public static string TAG_NAME_SWITCH {
             get {
                 return ResourceManager.GetString("TAG_NAME_SWITCH", resourceCulture);
             }
@@ -453,7 +453,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --tag-name: GitHub tag to associate this release with..
         /// </summary>
-        internal static string TAG_NAME_SWITCH_USAGE {
+        public static string TAG_NAME_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("TAG_NAME_SWITCH_USAGE", resourceCulture);
             }
@@ -462,7 +462,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --target-branch.
         /// </summary>
-        internal static string TARGET_BRANCH_SWITCH {
+        public static string TARGET_BRANCH_SWITCH {
             get {
                 return ResourceManager.GetString("TARGET_BRANCH_SWITCH", resourceCulture);
             }
@@ -471,7 +471,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --target-branch: GitHub branch to target this release from..
         /// </summary>
-        internal static string TARGET_BRANCH_SWITCH_USAGE {
+        public static string TARGET_BRANCH_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("TARGET_BRANCH_SWITCH_USAGE", resourceCulture);
             }
@@ -480,7 +480,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to test app.
         /// </summary>
-        internal static string TestAppUserAgent {
+        public static string TestAppUserAgent {
             get {
                 return ResourceManager.GetString("TestAppUserAgent", resourceCulture);
             }
@@ -489,7 +489,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to undefined.
         /// </summary>
-        internal static string UndefinedParameterName {
+        public static string UndefinedParameterName {
             get {
                 return ResourceManager.GetString("UndefinedParameterName", resourceCulture);
             }
@@ -498,7 +498,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Usage:.
         /// </summary>
-        internal static string Usage {
+        public static string Usage {
             get {
                 return ResourceManager.GetString("Usage", resourceCulture);
             }
@@ -507,7 +507,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --user-access-token.
         /// </summary>
-        internal static string USER_ACCESS_TOKEN_SWITCH {
+        public static string USER_ACCESS_TOKEN_SWITCH {
             get {
                 return ResourceManager.GetString("USER_ACCESS_TOKEN_SWITCH", resourceCulture);
             }
@@ -516,7 +516,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --user-access-token: String specifying the user access token to use with GitHub API..
         /// </summary>
-        internal static string USER_ACCESS_TOKEN_SWITCH_USAGE {
+        public static string USER_ACCESS_TOKEN_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("USER_ACCESS_TOKEN_SWITCH_USAGE", resourceCulture);
             }
@@ -525,7 +525,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to User-Agent.
         /// </summary>
-        internal static string UserAgentHeaderName {
+        public static string UserAgentHeaderName {
             get {
                 return ResourceManager.GetString("UserAgentHeaderName", resourceCulture);
             }
@@ -534,7 +534,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ERROR: Current user does not have access permissions to folder &apos;{0}&apos;..
         /// </summary>
-        internal static string UserNotHasPermissionsToFolder {
+        public static string UserNotHasPermissionsToFolder {
             get {
                 return ResourceManager.GetString("UserNotHasPermissionsToFolder", resourceCulture);
             }
@@ -544,7 +544,7 @@ namespace github_release_poster.Properties {
         ///   Looks up a localized string similar to Release body is:
         ///{0}.
         /// </summary>
-        internal static string UsingReleaseBody {
+        public static string UsingReleaseBody {
             get {
                 return ResourceManager.GetString("UsingReleaseBody", resourceCulture);
             }
@@ -553,7 +553,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Release name is &apos;{0}&apos;.
         /// </summary>
-        internal static string UsingReleaseName {
+        public static string UsingReleaseName {
             get {
                 return ResourceManager.GetString("UsingReleaseName", resourceCulture);
             }
@@ -562,7 +562,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Using repo-name &apos;{0}&apos;..
         /// </summary>
-        internal static string UsingRepoName {
+        public static string UsingRepoName {
             get {
                 return ResourceManager.GetString("UsingRepoName", resourceCulture);
             }
@@ -571,7 +571,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Using repo-owner &apos;{0}&apos;..
         /// </summary>
-        internal static string UsingRepoOwner {
+        public static string UsingRepoOwner {
             get {
                 return ResourceManager.GetString("UsingRepoOwner", resourceCulture);
             }
@@ -580,7 +580,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Using release tag &apos;{0}&apos;..
         /// </summary>
-        internal static string UsingTagName {
+        public static string UsingTagName {
             get {
                 return ResourceManager.GetString("UsingTagName", resourceCulture);
             }
@@ -589,7 +589,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Using target branch &apos;{0}&apos;..
         /// </summary>
-        internal static string UsingTargetBranch {
+        public static string UsingTargetBranch {
             get {
                 return ResourceManager.GetString("UsingTargetBranch", resourceCulture);
             }
@@ -598,7 +598,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to Using user access token &apos;{0}&apos;..
         /// </summary>
-        internal static string UsingUserAccessToken {
+        public static string UsingUserAccessToken {
             get {
                 return ResourceManager.GetString("UsingUserAccessToken", resourceCulture);
             }
@@ -607,7 +607,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to --version: This switch displays this program&apos;s name and version number, along with a copyright message.  If specified, the --version switch must appear by itself..
         /// </summary>
-        internal static string VERSION_SWITCH_USAGE {
+        public static string VERSION_SWITCH_USAGE {
             get {
                 return ResourceManager.GetString("VERSION_SWITCH_USAGE", resourceCulture);
             }
@@ -616,7 +616,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to {0} version {1}.
         /// </summary>
-        internal static string VersionString {
+        public static string VersionString {
             get {
                 return ResourceManager.GetString("VersionString", resourceCulture);
             }
@@ -625,7 +625,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ERROR: The output ZIP file for the release assets may not be in the same folder as the assets themselves..
         /// </summary>
-        internal static string ZipFolderMustBeDifferentFromAssetFolder {
+        public static string ZipFolderMustBeDifferentFromAssetFolder {
             get {
                 return ResourceManager.GetString("ZipFolderMustBeDifferentFromAssetFolder", resourceCulture);
             }
@@ -634,7 +634,7 @@ namespace github_release_poster.Properties {
         /// <summary>
         ///   Looks up a localized string similar to ERROR: Blank value supplied for ZIP file output folder path. Stopping..
         /// </summary>
-        internal static string ZipOutputFolderBlank {
+        public static string ZipOutputFolderBlank {
             get {
                 return ResourceManager.GetString("ZipOutputFolderBlank", resourceCulture);
             }
