@@ -7,10 +7,10 @@ namespace github_release_poster
         public static bool IsReleaseValid(NewRelease release)
         {
             Console.WriteLine("Validating release metadata...");
-            if (release == null)
-                return false;
 
-            return true;
+            // TODO: Add more checks here
+
+            return release != null;
         }
     }
 }
