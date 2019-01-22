@@ -92,6 +92,8 @@
     <Compile Include="FileAndFolderHelper.cs" />
     <Compile Include="FileAppenderConfigurator.cs" />
     <Compile Include="FileAppenderManager.cs" />
+    <Compile Include="FileSearcher.cs" />
+    <Compile Include="FileSystemEnumerable.cs" />
     <Compile Include="GitHubHelper.cs" />
     <Compile Include="GitHubReleasePoster.cs" />
     <Compile Include="GitHubReleaseValidator.cs" />
