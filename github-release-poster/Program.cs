@@ -10,18 +10,7 @@ namespace github_release_poster
         [STAThread]
         public static void Main(string[] args)
         {
-            LogFileManager.InitializeLogging();
-            if (!LogFileManager.IsLoggingInitialized)
-            {
-                /* Detect whether we failed to initialize the log file, and, if so,
-                 then exit gracefully */
-                Console.WriteLine(Resources.FailedToInitializeLogFile);
-                Environment.Exit(Resources.FAILED_TO_INITIALIZE_LOGGING);
-            }
-
-            // If we are here, then logging got set up properly.
-            // Clear out the garbage the logging subsystem wrote to the console
-            DebugUtils.ClearConsole();
+            SafeClearConsole();
 
             // Examine the command line for valid inputs, and fill the properties of the
             // CommandLineInfo object accordingly.
@@ -44,7 +33,7 @@ namespace github_release_poster
         public static void PrintUsageMessage()
         {
             // clear the console -- IF we are not running unit tests!
-            DebugUtils.ClearConsole();
+            SafeClearConsole();
 
             PrintVersionNumber();
             Console.WriteLine();
@@ -88,14 +77,33 @@ namespace github_release_poster
             Console.WriteLine(fileVersionInfo.LegalCopyright);
         }
 
+        /// <summary>
+        /// Clears all output from the user's console.
+        /// </summary>
+        public static void SafeClearConsole()
+        {
+            try
+            {
+                Console.Clear(); // can throw exceptions during unit tests -- but we don't care
+            }
+            catch
+            {
+                //Ignored.
+            }
+        }
+
+        /// <summary>
+        /// Called to examine the properties of the <see cref="T:github_release_poster.CommandLineInfo"/> object
+        /// and then take appropriate action.
+        /// </summary>
+        /// <returns>True if the command line was processed successfully; false otherwise.</returns>
         private static bool ProcessCommandLine()
         {
             if (CommandLineInfo.Instance.ShouldDisplayVersion)
             {
                 // By now, we've already displayed the version number of the program
-                // to the user as called for by the --version switch, so exit the program
-                // here with a 'success' error code.
-                Environment.Exit(Resources.EXIT_SUCCESS);
+                // to the user as called for by the --version switch.  So, we are done.
+                return true;
             }
 
             var newRelease = NewReleaseFactory.CreateNewRelease(
