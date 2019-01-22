@@ -132,9 +132,6 @@ namespace github_release_poster
                 return false;
             }
 
-            Program.PrintVersionNumber();
-            Console.WriteLine();
-
             // --version - Displays this application's version.  Must be the only switch specified on the command line.
             if (args.Length == 1
                 && args.Contains("--version"))
