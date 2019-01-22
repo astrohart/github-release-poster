@@ -3,6 +3,7 @@ using log4net.Config;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 
 namespace github_release_poster
@@ -95,8 +96,9 @@ namespace github_release_poster
 
             if (string.IsNullOrWhiteSpace(LogFilePath))
             {
-                // Failed to initialize logging.
-                IsLoggingInitialized = false;
+                // if we are here, then the call above did not work, try to load the configuration from the
+                // .exe.config file which may have been included as an embedded resource.
+                IsLoggingInitialized = ConfigureLogFileFromEmbeddedResource();
                 return;
             }
 
@@ -162,6 +164,45 @@ namespace github_release_poster
 
             // initialization succeeded
             IsLoggingInitialized = true;
+        }
+
+        /// <summary>
+        /// Attempts to run the XmlConfigurator off of a .exe.config file that is an embedded resource, if possible.
+        /// </summary>
+        private static bool ConfigureLogFileFromEmbeddedResource()
+        {
+            // write the name of the current class and method we are now entering, into the log
+            Console.WriteLine(
+                "In LogFileManager.ConfigureLogFileFromEmbeddedResource");
+
+            var result = false;
+
+            var assembly = Assembly.GetCallingAssembly();
+            var names = Assembly.GetExecutingAssembly().GetManifestResourceNames();
+            var searchResult = names.ToList().Find(s => s.EndsWith(".config"));
+            var resourceName = string.IsNullOrWhiteSpace(searchResult) ? "log4net.config" : searchResult;
+
+            try
+            {
+                using (var stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    var collectionResult = XmlConfigurator.Configure(stream);
+                    if (collectionResult == null || collectionResult.Count == 0)
+                        result = false;
+                }
+
+                result = true;
+            }
+            catch
+            {
+                // Ignored.
+                result = false;
+            }
+
+            Console.WriteLine(
+                "LogFileManager.ConfigureLogFileFromEmbeddedResource: Done.");
+
+            return result;
         }
 
         /// <summary>
