@@ -19,19 +19,22 @@ namespace github_release_poster
                 Environment.Exit(Resources.FAILED_TO_INITIALIZE_LOGGING);
             }
 
-            // If we are here, then logging got set up properly. 
+            // If we are here, then logging got set up properly.
             // Clear out the garbage the logging subsystem wrote to the console
-            Console.Clear();
-            
+            DebugUtils.ClearConsole();
+
             // Examine the command line for valid inputs, and fill the properties of the
             // CommandLineInfo object accordingly.
-            CommandLineInfo.Instance.ParseCommandLine(args);
+            if (!CommandLineInfo.Instance.ParseCommandLine(args))
+            {
+                Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);
+            }
 
             // Take action based on what the user passed on the command line.
             if (!ProcessCommandLine())
             {
                 PrintUsageMessage();
-                Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);
+                Environment.Exit(Resources.FAILED_TO_PROCESS_COMMAND_LINE);
             }
 
             // If we are here, the program ran successfully.  Exit with a success error code.
@@ -40,6 +43,9 @@ namespace github_release_poster
 
         public static void PrintUsageMessage()
         {
+            // clear the console -- IF we are not running unit tests!
+            DebugUtils.ClearConsole();
+
             PrintVersionNumber();
             Console.WriteLine();
             Console.WriteLine(Resources.Usage);
@@ -77,7 +83,7 @@ namespace github_release_poster
             var name = execAssembly.GetName();
 
             Console.WriteLine(Resources.VersionString,
-                name.Name.Replace(".exe", String.Empty),
+                name.Name.Replace(".exe", string.Empty),
                 name.Version);
             Console.WriteLine(fileVersionInfo.LegalCopyright);
         }

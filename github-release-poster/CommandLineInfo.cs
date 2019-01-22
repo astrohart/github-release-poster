@@ -1,8 +1,8 @@
-﻿using System;
+﻿using github_release_poster.Properties;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using github_release_poster.Properties;
 
 namespace github_release_poster
 {
@@ -11,13 +11,6 @@ namespace github_release_poster
     /// </summary>
     public class CommandLineInfo
     {
-        /// <summary>
-        /// Gets or sets a flag indicating whether the release assets should be compressed into a ZIP file.
-        /// </summary>
-        /// <remarks>If this flag is true, do not compress the assets.  Otherwise, compress them in a ZIP format file before uploading to the release.
-        /// The user must specify the '--no-zip' flag on the command line to set this flag to true.  By default, it's initialized to have the value of false.</remarks>
-        public bool ShouldNotZip { get; set; }
-
         /// <summary>
         /// Holds an reference to the one and only instance of <see cref="T:github_release_poster.CommandLineInfo"/>.
         /// </summary>
@@ -80,6 +73,13 @@ namespace github_release_poster
         public bool ShouldDisplayVersion { get; set; }
 
         /// <summary>
+        /// Gets or sets a flag indicating whether the release assets should be compressed into a ZIP file.
+        /// </summary>
+        /// <remarks>If this flag is true, do not compress the assets.  Otherwise, compress them in a ZIP format file before uploading to the release.
+        /// The user must specify the '--no-zip' flag on the command line to set this flag to true.  By default, it's initialized to have the value of false.</remarks>
+        public bool ShouldNotZip { get; set; }
+
+        /// <summary>
         /// Gets or sets the name of this release's GitHub tag.
         /// </summary>
         public string TagName { get; set; }
@@ -95,10 +95,17 @@ namespace github_release_poster
         public string UserAccessToken { get; set; }
 
         /// <summary>
+        /// Gets a value that indicates whether the command-line arguments were parsed correctly.
+        /// </summary>
+        public bool WasCommandLineParsed { get; private set; }
+
+        /// <summary>
         /// Resets this object's properties to their default values.
         /// </summary>
         public void Clear()
         {
+            WasCommandLineParsed = false;
+
             Body = string.Empty;
             IsDraft = false;
             IsPreRelease = false;
@@ -116,13 +123,13 @@ namespace github_release_poster
         /// Parses this application's command line and sets the properties of this object accordingly.
         /// </summary>
         /// <param name="args">Reference to an instance of an array of strings that contains the application's command-line arguments.</param>
-        public void ParseCommandLine(string[] args)
+        public bool ParseCommandLine(string[] args)
         {
             // If no args were passed, then stop.
             if (!args.Any())
             {
                 Program.PrintUsageMessage();
-                Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);
+                return false;
             }
 
             Program.PrintVersionNumber();
@@ -133,7 +140,7 @@ namespace github_release_poster
                 && args.Contains("--version"))
             {
                 ShouldDisplayVersion = true;
-                return;
+                return true;
             }
 
             var isError = false;
@@ -249,6 +256,9 @@ namespace github_release_poster
 
             if (isError)
                 Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);
+
+            WasCommandLineParsed = !isError;
+            return WasCommandLineParsed;
         }
 
         /// <summary>

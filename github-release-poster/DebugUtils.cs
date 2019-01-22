@@ -10,6 +10,21 @@ namespace github_release_poster
 {
     public static class DebugUtils
     {
+        /// <summary>
+        /// Clears any messages to the system console so that the subsystem can start over
+        /// </summary>
+        public static void ClearConsole()
+        {
+            try
+            {
+                Console.Clear();
+            }
+            catch
+            {
+                // Ignored.
+            }
+        }
+
         ///<summary>
         /// Constructs a new instance of <see cref="DebugUtils"/>.
         ///</summary>

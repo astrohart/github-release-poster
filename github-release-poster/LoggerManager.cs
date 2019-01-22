@@ -17,7 +17,7 @@ namespace github_release_poster
 
             var repo = LoggerRepositoryManager.GetHierarchyRepository();
             if (repo == null)
-                return result;
+                return null;
 
             result = repo.Root;
 
