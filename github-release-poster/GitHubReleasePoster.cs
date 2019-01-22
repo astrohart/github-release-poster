@@ -69,6 +69,17 @@ namespace github_release_poster
             request.AddParameter(Resources.UndefinedParameterName, json, ParameterType.RequestBody);
             var response = client.Execute(request);
 
+            if (response == null)
+            {
+                Console.WriteLine("ERROR: Failed to post release.");
+                return;
+            }
+
+            var responseData = response.Content.FromJson();
+
+            // get the ID of the new release
+            Console.WriteLine($"Posted release {responseData.id} to {responseData.target_commitish}.");
+
             Console.WriteLine(Resources.ProcessingReleaseAssets);
 
             // process the assets
@@ -78,10 +89,20 @@ namespace github_release_poster
                 // Use GUIDs to name the zip and the folder to put it in.
                 var outputZipFilePath = $@"{Path.GetTempPath()}\{Guid.NewGuid()}\{Guid.NewGuid()}.zip";
 
-                if (ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
-                    return;
+                if (!ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
+                    return;     // Failed to zip up the release files
+
                 Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
-                return; /* failed to compress assets */
+
+                client = new RestClient(
+                    $"{responseData.assets_url}?name={Path.GetFileName(outputZipFilePath)}&label={Path.GetFileName(outputZipFilePath)}");
+                request = new RestRequest(Method.POST);
+                request.AddHeader("cache-control", "no-cache");
+                request.AddHeader("Content-Type", Resources.ZipFileContentType);
+                request.AddHeader("User-Agent", "test app");
+                request.AddHeader("Authorization", $"token {userAccessToken}");
+                request.AddParameter(Resources.ZipFileContentType, File.ReadAllBytes(outputZipFilePath), ParameterType.RequestBody);
+                response = client.Execute(request);
 
                 // TODO: Add code here to post the ZIP file to the release using the upload URL
             }

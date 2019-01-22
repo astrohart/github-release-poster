@@ -341,4 +341,7 @@
   <data name="NoFilesFoundForZipping" xml:space="preserve">
     <value>ERROR: No files found in the destination that were suitable for ZIPping.</value>
   </data>
+  <data name="ZipFileContentType" xml:space="preserve">
+    <value>application/zip</value>
+  </data>
 </root>

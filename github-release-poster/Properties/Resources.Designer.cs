@@ -705,6 +705,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to application/zip.
+        /// </summary>
+        public static string ZipFileContentType {
+            get {
+                return ResourceManager.GetString("ZipFileContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ERROR: The output ZIP file for the release assets may not be in the same folder as the assets themselves..
         /// </summary>
         public static string ZipFolderMustBeDifferentFromAssetFolder {
