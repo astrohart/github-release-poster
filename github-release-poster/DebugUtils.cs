@@ -234,6 +234,13 @@ namespace github_release_poster
                 return;
             }
 
+            if (!LogFileManager.IsLoggingInitialized)
+            {
+                /* only write to the console if the log file manager is not initialized yet */
+                Console.WriteLine(format, args);
+                return;
+            }
+
 #if !DEBUG
             /* If this software is currently running in Release mode, then do not output ANY lines of text
              * that are meant to be debugging logging statements! So, that is, if we detect that the debugLevel
