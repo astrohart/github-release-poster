@@ -25,7 +25,7 @@ namespace github_release_poster_tests
             "master",
             $"--tag-name",
             $"{Guid.NewGuid()}",
-            "--release-asset-dir ",
+            "--release-asset-dir",
             @"C:\Users\ENS Brian Hart\source\repos\github-release-poster\github-release-poster\bin\x64\Debug",
             "--name",
             $"{Guid.NewGuid()}"
