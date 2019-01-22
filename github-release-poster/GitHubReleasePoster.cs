@@ -1,7 +1,7 @@
-﻿using System;
-using System.IO;
-using github_release_poster.Properties;
+﻿using github_release_poster.Properties;
 using RestSharp;
+using System;
+using System.IO;
 
 namespace github_release_poster
 {
@@ -22,7 +22,7 @@ namespace github_release_poster
         /// that contains the required release information in its properties.
         /// <remarks>The <see cref="T:github_releaser.NewRelease"/> object is serialized to JSON and then posted to the GitHub Server.  This object is assumed to have valid information.
         /// To validate the information, call the <see cref="M:github_releaser.GitHubReleaeValidator.IsReleaseValid"/> method.</remarks>
-        public static void PostNewRelease(string repoName, 
+        public static void PostNewRelease(string repoName,
             string repoOwner, string userAccessToken, string releaseAssetDir,
             NewRelease release, bool shouldNotZip = false)
         {
@@ -90,9 +90,10 @@ namespace github_release_poster
                 var outputZipFilePath = $@"{Path.GetTempPath()}\{Guid.NewGuid()}\{Guid.NewGuid()}.zip";
 
                 if (!ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
-                    return;     // Failed to zip up the release files
-
-                Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
+                {
+                    Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
+                    return; // Failed to zip up the release files
+                }
 
                 client = new RestClient(
                     $"{responseData.assets_url}?name={Path.GetFileName(outputZipFilePath)}&label={Path.GetFileName(outputZipFilePath)}");
@@ -101,7 +102,8 @@ namespace github_release_poster
                 request.AddHeader("Content-Type", Resources.ZipFileContentType);
                 request.AddHeader("User-Agent", "test app");
                 request.AddHeader("Authorization", $"token {userAccessToken}");
-                request.AddParameter(Resources.ZipFileContentType, File.ReadAllBytes(outputZipFilePath), ParameterType.RequestBody);
+                request.AddParameter(Resources.ZipFileContentType, 
+                    File.ReadAllBytes(outputZipFilePath), ParameterType.RequestBody);
                 response = client.Execute(request);
 
                 // TODO: Add code here to post the ZIP file to the release using the upload URL
