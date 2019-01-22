@@ -31,7 +31,7 @@ namespace github_release_poster
         {
             get
             {
-                var rootAppender = FileAppenderManager.GetFirstAppender();
+                var rootAppender = FileAppenderManager.GetFirstFileAppender();
 
                 var result = rootAppender != null ? rootAppender.File : string.Empty;
 
@@ -155,7 +155,7 @@ namespace github_release_poster
             }
 
             // Set options on the file appender of the logging system to minimize locking issues
-            FileAppenderConfigurator.SetMinimalLock(FileAppenderManager.GetFirstAppender());
+            FileAppenderConfigurator.SetMinimalLock(FileAppenderManager.GetFirstFileAppender());
 
             // If the overwrite parameter's value is set to true, then overwrite the log -- that is,
             // delete any existing log file that may already exist.
