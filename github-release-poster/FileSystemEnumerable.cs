@@ -10,6 +10,7 @@ namespace github_release_poster
     // This code is public domain
     // Shout out to Matthew Brubaker who posted it at:
     // <https://stackoverflow.com/questions/13130052/directoryinfo-enumeratefiles-causes-unauthorizedaccessexception-and-other>
+/*
     public class FileSystemEnumerable : IEnumerable<FileSystemInfo>
     {
         private readonly ILog _logger = LogManager.GetLogger(typeof(FileSystemEnumerable));
@@ -103,4 +104,5 @@ namespace github_release_poster
             return GetEnumerator();
         }
     }
+*/
 }
