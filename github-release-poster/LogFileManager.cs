@@ -166,7 +166,10 @@ namespace github_release_poster
                 EventLogManager.Instance.Initialize(DebugUtils.ApplicationName, EventLogType.Application);
             }
 
-            SetUpDebugUtils(muteDebugLevelIfReleaseMode, TODO);
+            // Set up the DebugUtils object with values that specify how we want logging done.  Be sure to specify that
+            // we should not write log messages to the console under any circumstances, since this is a console application
+            // that may be interactive to the user or have its stdout results parsed by another program.
+            SetUpDebugUtils(muteDebugLevelIfReleaseMode, true, false, 1, true);
 
             // done
         }
@@ -175,7 +178,6 @@ namespace github_release_poster
         /// Sets up the <see cref="T:github_release_poster.DebugUtils"/> to initialize its functionality.
         /// </summary>
         /// <param name="muteDebugLevelIfReleaseMode">If set to true, does not echo any logging statements that are set to <see cref="DebugLevel.Info"/>.</param>
-        /// <param name="noConsole"></param>
         /// <param name="isLogging">True to activate the functionality of writing to a log file; false to suppress.  Usually used with the <see cref="consoleOnly"/> parameter set to true.</param>
         /// <param name="consoleOnly">True to only write messages to the console; false to write them both to the console and to the log.</param>
         /// <param name="verbosity">Zero to suppress every message; greater than zero to echo every message.</param>
