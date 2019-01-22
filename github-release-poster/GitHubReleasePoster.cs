@@ -77,22 +77,20 @@ namespace github_release_poster
             {
                 // Use GUIDs to name the zip and the folder to put it in.
                 var outputZipFilePath = $@"{Path.GetTempPath()}\{Guid.NewGuid()}\{Guid.NewGuid()}.zip";
-                
-                if (!ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
-                {
-                    Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
-                    return; /* failed to compress assets */
-                }
+
+                if (ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
+                    return;
+                Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
+                return; /* failed to compress assets */
 
                 // TODO: Add code here to post the ZIP file to the release using the upload URL
             }
             else
             {
-
+                // TODO: Add code here to upload files one by one to GitHub
             }
 
-
-            // TODO: Add code here to post the release to GitHub
+            // done
         }
     }
 }
