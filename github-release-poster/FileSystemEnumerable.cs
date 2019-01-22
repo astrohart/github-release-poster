@@ -45,7 +45,7 @@ namespace github_release_poster
                 {
                     _logger.DebugFormat($"Using pattern '{pattern}'");
                     matches = matches.Concat(_root.EnumerateDirectories(pattern, SearchOption.TopDirectoryOnly))
-                                     .Concat(_root.EnumerateFiles(pattern, SearchOption.TopDirectoryOnly));
+                        .Concat(_root.EnumerateFiles(pattern, SearchOption.TopDirectoryOnly));
                 }
             }
             catch (UnauthorizedAccessException)
@@ -63,7 +63,15 @@ namespace github_release_poster
                 // "The symbolic link cannot be followed because its type is disabled."
                 // "The specified network name is no longer available."
                 _logger.Warn(
-                    $@"Could not process path (check SymlinkEvaluation rules)'{_root.Parent?.FullName}\{_root.Name}'.", e);
+                    $@"Could not process path (check SymlinkEvaluation rules)'{_root.Parent?.FullName}\{_root.Name}'.",
+                    e);
+                yield break;
+            }
+            catch
+            {
+                // All other exceptions -- just skip it
+                _logger.Warn(
+                    @"Caught an unknown exception.  Perhaps we have stumbled upon a file or directory which is protected by the operating system.");
                 yield break;
             }
 

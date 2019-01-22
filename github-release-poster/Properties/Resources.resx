@@ -164,7 +164,7 @@
     <value>The switch '{0}' is required.</value>
   </data>
   <data name="ReleaseAssetDirNotFound" xml:space="preserve">
-    <value>The release asset directory '{0}' could not be located.  Please check whether the directory exists.</value>
+    <value>ERROR: The release asset directory '{0}' could not be located.  Please check whether the directory exists.</value>
   </data>
   <data name="ReleaseAssetsComeFromFolder" xml:space="preserve">
     <value>Release assets come from folder '{0}'.</value>
@@ -331,5 +331,14 @@
   </data>
   <data name="ZippingReleaseAssets" xml:space="preserve">
     <value>This release's assets will be placed in a ZIP file prior to upload.</value>
+  </data>
+  <data name="ReleaseZipFileNameContainsInvalidChars" xml:space="preserve">
+    <value>ERROR: The name of the destination ZIP file '{0}'  for the release assets contains invalid characters.</value>
+  </data>
+  <data name="ReleaseAssetDirContainsInvalidChars" xml:space="preserve">
+    <value>ERROR: The release asset directory path, '{0}', contains characters that Windows does not allow to be present in a file or directory name.</value>
+  </data>
+  <data name="NoFilesFoundForZipping" xml:space="preserve">
+    <value>ERROR: No files found in the destination that were suitable for ZIPping.</value>
   </data>
 </root>

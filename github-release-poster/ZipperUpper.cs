@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using github_release_poster.Properties;
+﻿using github_release_poster.Properties;
 using ICSharpCode.SharpZipLib.Zip;
+using System;
+using System.IO;
 
 namespace github_release_poster
 {
@@ -20,6 +19,15 @@ namespace github_release_poster
         /// <returns></returns>
         public static bool CompressDirectory(string directoryPath, string zipFilePath)
         {
+            // write the name of the current class and method we are now entering, into the log
+            DebugUtils.WriteLine(DebugLevel.Debug, "In ZipperUpper.CompressDirectory");
+
+            // Dump the variable directoryPath to the log
+            DebugUtils.WriteLine(DebugLevel.Debug, "ZipperUpper.CompressDirectory: directoryPath = '{0}'", directoryPath);
+
+            // Dump the variable zipFilePath to the log
+            DebugUtils.WriteLine(DebugLevel.Debug, "ZipperUpper.CompressDirectory: zipFilePath = '{0}'", zipFilePath);
+
             if (!Directory.Exists(directoryPath))
             {
                 // assume the directoryPath parameter specifies the release asset directory
@@ -31,6 +39,14 @@ namespace github_release_poster
             {
                 // Oops!  There is nowhere to deposit the zip file when we're done!
                 Console.WriteLine(Resources.OutputZipFilePathBlank);
+                return false;
+            }
+
+            // Check whether the zipFilePath contains characters that the operating
+            // system does not allow to appear in a valid file name
+            if (Path.GetFileName(zipFilePath).IndexOfAny(Path.GetInvalidFileNameChars()) >= 0)
+            {
+                Console.WriteLine(Resources.ReleaseZipFileNameContainsInvalidChars, zipFilePath);
                 return false;
             }
 
@@ -73,38 +89,85 @@ namespace github_release_poster
                 return false;
             }
 
+            // Delete the output file if it already exists.
+            if (File.Exists(zipFilePath))
+                File.Delete(zipFilePath);
+
             try
             {
-                // Finished with validation, let's proceed to ZIP up the files in the input folder.
-                var zipEntries = FileSearcher.GetAllFilesInFolder(directoryPath)
-                    .Where(fsi => fsi.Exists)
-                    .Select(fsi =>
-                    {
-                        var result = new ZipEntry(ZipEntry.CleanName(fsi.FullName))
-                        {
-                            Size = new FileInfo(fsi.FullName).Length
-                        };
-                        return result;
-                    }).ToList();
-                if (!zipEntries.Any())
-                    return false;
+                var events = new FastZipEvents();
 
-                using (var zipFile = new ZipFile(zipFilePath))
-                {
-                    zipFile.UseZip64 = UseZip64.Off;
-
-                    foreach (var entry in zipEntries)
-                    {
-                        zipFile.Add(entry);
-                    }
-                }
+                // try to keep going even if a particular file or folder fails
+                events.FileFailure += (s1, a1) => a1.ContinueRunning = true;
+                events.DirectoryFailure += (s2, a2) => a2.ContinueRunning = true;
+                
+                new FastZip(events)
+                    .CreateZip(
+                        zipFilePath,
+                        directoryPath,
+                        true,
+                        string.Empty);
             }
-            catch
+            catch (Exception e)
             {
+                // dump all the exception info to the log
+                DebugUtils.LogException(e);
+
+                if (File.Exists(zipFilePath))
+                    File.Delete(zipFilePath);
+
                 return false;
             }
 
-            return true; // operation succeeded.
+            return File.Exists(zipFilePath); // operation succeeded if the zip file exists at the path the user wants it at.
         }
+
+        /// <summary>
+        /// Given a reference to an instance of <see cref="T:System.IO.FileSystemInfo"/> representing a file to be
+        /// ZIPped, creates an instance of a <see cref="T:ICSharpCode.SharpZipLib.Zip.ZipEntry"/> and returns a
+        /// reference to the instance.
+        /// </summary>
+        /// <param name="fsi">Reference to an instance of <see cref="T:System.IO.FileSystemInfo"/> that
+        /// represents the file for which a <see cref="T:ICSharpCode.SharpZipLib.Zip.ZipEntry"/> instance should
+        /// be created.</param>
+        /// <returns>Reference to an instance of <see cref="T:ICSharpCode.SharpZipLib.Zip.ZipEntry"/> representing the file
+        /// to be zipped, or null if not successful.</returns>
+        private static ZipEntry CreateZipEntry(FileSystemInfo fsi)
+        {
+            var result = default(ZipEntry);
+
+            try
+            {
+                /* skip entries that come out of the file system enumerator that are
+                                         for folders only, since the path names of the files stored in the ZIP files
+                                         recreate folders anyway upon extraction. */
+                var cleanedName = ZipEntry.CleanName(fsi.FullName);
+                result = new ZipEntry(cleanedName)
+                {
+                    Size = new FileInfo(fsi.FullName).Length
+                    ,
+                    DateTime = fsi.LastWriteTime
+                };
+            }
+            catch (Exception e)
+            {
+                // dump all the exception info to the log
+                DebugUtils.LogException(e);
+
+                result = default(ZipEntry);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="T:System.IO.FileSystemInfo"/> instance
+        /// passed refers to a file or a folder, and whether the file so referred to exists.
+        /// </summary>
+        /// <param name="fsi">Reference to an instance of <see cref="T:System.IO.FileSystemInfo"/> that represents
+        /// the file to be examined.</param>
+        /// <returns>True if the file referenced to exists, and is not a folder; false otherwise.</returns>
+        private static bool EntryRefersToExistingFile(FileSystemInfo fsi)
+            => fsi.Exists && (fsi.Attributes & FileAttributes.Directory) != FileAttributes.Directory;
     }
 }

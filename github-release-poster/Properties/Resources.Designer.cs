@@ -326,7 +326,16 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are NOT zipping the release assets, but publishing all files in release dir one-at-a-time..
+        ///   Looks up a localized string similar to ERROR: No files found in the destination that were suitable for ZIPping..
+        /// </summary>
+        public static string NoFilesFoundForZipping {
+            get {
+                return ResourceManager.GetString("NoFilesFoundForZipping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This release&apos;s assets will NOT be zipped up prior to upload..
         /// </summary>
         public static string NotZippingReleaseAssets {
             get {
@@ -389,7 +398,16 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The release asset directory &apos;{0}&apos; could not be located.  Please check whether the directory exists..
+        ///   Looks up a localized string similar to ERROR: The release asset directory path, &apos;{0}&apos;, contains characters that Windows does not allow to be present in a file or directory name..
+        /// </summary>
+        public static string ReleaseAssetDirContainsInvalidChars {
+            get {
+                return ResourceManager.GetString("ReleaseAssetDirContainsInvalidChars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR: The release asset directory &apos;{0}&apos; could not be located.  Please check whether the directory exists..
         /// </summary>
         public static string ReleaseAssetDirNotFound {
             get {
@@ -439,6 +457,15 @@ namespace github_release_poster.Properties {
         public static string ReleaseWillNotBeMarkedPreRelease {
             get {
                 return ResourceManager.GetString("ReleaseWillNotBeMarkedPreRelease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR: The name of the destination ZIP file &apos;{0}&apos;  for the release assets contains invalid characters..
+        /// </summary>
+        public static string ReleaseZipFileNameContainsInvalidChars {
+            get {
+                return ResourceManager.GetString("ReleaseZipFileNameContainsInvalidChars", resourceCulture);
             }
         }
         
@@ -696,7 +723,7 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We are packaging the release assets in a ZIP file before publishing..
+        ///   Looks up a localized string similar to This release&apos;s assets will be placed in a ZIP file prior to upload..
         /// </summary>
         public static string ZippingReleaseAssets {
             get {

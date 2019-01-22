@@ -372,6 +372,28 @@ namespace github_release_poster
 
             try
             {
+                DebugUtils.WriteLine(DebugLevel.Debug,
+                    "FileAndFolderHelper.IsFolderWritable: Checking whether the folder '{0}' exists...",
+                    path);
+
+                // If the folder we are testing does not even exist in the first place, then it
+                // sure as hell is not writable
+                if (!Directory.Exists(path))
+                {
+                    DebugUtils.WriteLine(DebugLevel.Error,
+                        "FileAndFolderHelper.IsFolderWritable: The path '{0}' could not be located.  Therefore, it does not refer to a writable folder.",
+                        path);
+
+                    DebugUtils.WriteLine(DebugLevel.Debug, "FileAndFolderHelper.IsFolderWritable: Result = {0}", false);
+
+                    DebugUtils.WriteLine(DebugLevel.Debug, "FileAndFolderHelper.IsFolderWritable: Done.");
+
+                    return result;
+                }
+
+                DebugUtils.WriteLine(DebugLevel.Debug, "FileAndFolderHelper.IsFolderWritable: The folder '{0}' exists.",
+                    path);
+
                 DebugUtils.WriteLine(DebugLevel.Info,
                     "FileAndFolderHelper.IsFolderWritable: Getting the access rules for the folder '{0}' and current user...",
                     path);
