@@ -115,7 +115,11 @@ namespace github_release_poster
                 CommandLineInfo.Instance.TargetBranch
             );
 
-            if (!GitHubReleaseValidator.IsReleaseValid(newRelease))
+            if (!GitHubReleaseValidator.IsReleaseValid(newRelease,
+                CommandLineInfo.Instance.RepoName,
+                CommandLineInfo.Instance.RepoOwner,
+                CommandLineInfo.Instance.UserAccessToken,
+                CommandLineInfo.Instance.ReleaseAssetDir))
             {
                 Console.WriteLine(Resources.FailedValidateReleaseMetadata);
                 return false; // Failed to validate release information

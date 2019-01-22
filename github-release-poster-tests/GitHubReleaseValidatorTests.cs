@@ -1,7 +1,7 @@
 ﻿using github_release_poster;
-using github_release_poster_tests.Properties;
 using NUnit.Framework;
 using System;
+using Resources = github_release_poster_tests.Properties.Resources;
 
 namespace github_release_poster_tests
 {
@@ -26,7 +26,14 @@ namespace github_release_poster_tests
                 Resources.TestingReleaseTargetBranch
             );
 
-            Assert.IsTrue(GitHubReleaseValidator.IsReleaseValid(release));
+            Assert.IsTrue(GitHubReleaseValidator.IsReleaseValid(release,
+                Resources.TestingReleaseRepoName,
+                Resources.TestingReleaseRepoOwner,
+                Guid.NewGuid().ToString()
+                    .Replace("-", string.Empty),
+                Resources.TestingValidReleaseAssetDir
+                )
+            );
         }
     }
 }
