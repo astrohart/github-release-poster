@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandLineInfoTests.cs" />
+    <Compile Include="GitHubReleaseValidatorTests.cs" />
     <Compile Include="LogFileManagerTests.cs" />
     <Compile Include="NewReleaseFactoryTests.cs" />
     <Compile Include="ProgramTests.cs" />

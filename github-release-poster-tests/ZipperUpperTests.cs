@@ -14,9 +14,12 @@ namespace github_release_poster_tests
         private const string FakeFilePath = "@?%$asdlkfjaskldjhfsa;ldkjf;ksajdhds;kjagh";
 
         /// <summary>
-        /// Valid path to a directory that commonly exists on Win10 systems (with Intel processors, at the very least)
+        /// Valid path to a directory that commonly exists on Win10 systems --
+        /// the Downloads folder! LOL
         /// </summary>
-        public string ValidDirectoryPath { get; } = Path.GetTempPath();
+        public string ValidDirectoryPath { get; } = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+            @"Dropbox\Downloads");
 
         /// <summary>
         /// Valid path to a testing zip file to create.  Make this a file named after
