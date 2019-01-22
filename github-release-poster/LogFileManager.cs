@@ -13,6 +13,11 @@ namespace github_release_poster
     public static class LogFileManager
     {
         /// <summary>
+        /// Gets the name of the directory that the log file is located in.
+        /// </summary>
+        private static string LogFileDirectoryName => Path.GetDirectoryName(LogFilePath);
+
+        /// <summary>
         /// Gets the full path and filename to the log file for this application.
         /// </summary>
         private static string LogFilePath
@@ -83,13 +88,13 @@ namespace github_release_poster
                 return;
             }
 
-            // If we are here, then the required string property, LogFilePath, has a value.
-
-            var logFileDirectoryName = Path.GetDirectoryName(LogFilePath);
-            if (string.IsNullOrWhiteSpace(logFileDirectoryName))
+            // If we are here, then the required string property, LogFilePath, has a value.  Check to ensure that the
+            // LogFileDirectoryName read-only property also has a value, which should be the path to the folder in which
+            // the log file lives.
+            if (string.IsNullOrWhiteSpace(LogFileDirectoryName))
                 return;
 
-            var directoryInfo = new DirectoryInfo(logFileDirectoryName).Parent;
+            var directoryInfo = new DirectoryInfo(LogFileDirectoryName).Parent;
             if (directoryInfo != null)
             {
                 // Check whether the user has write permissions on the directory tree that will
@@ -118,14 +123,14 @@ namespace github_release_poster
             }
 
             // Check whether the log file directory already exists.  If not, then try to create it.
-            FileAndFolderHelper.CreateDirectoryIfNotExists(logFileDirectoryName);
+            FileAndFolderHelper.CreateDirectoryIfNotExists(LogFileDirectoryName);
 
             // We have to insist that the directory that the log file is in is writeable.  If we can't
             // get write access to the log file directory, then throw an exception.
-            if (!FileAndFolderHelper.IsFolderWritable(logFileDirectoryName))
+            if (!FileAndFolderHelper.IsFolderWritable(LogFileDirectoryName))
             {
                 throw new UnauthorizedAccessException(
-                    $"The current user does not have write permissions to the directory '{logFileDirectoryName}'.");
+                    $"The current user does not have write permissions to the directory '{LogFileDirectoryName}'.");
             }
 
             // Set options on the file appender of the logging system to minimize locking issues
