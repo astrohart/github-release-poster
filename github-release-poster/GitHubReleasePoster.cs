@@ -2,7 +2,9 @@
 using RestSharp;
 using System;
 using System.IO;
-using System.Runtime.Versioning;
+using System.Linq;
+using System.Net;
+using System.Web;
 
 namespace github_release_poster
 {
@@ -21,11 +23,13 @@ namespace github_release_poster
         /// <param name="release">(Required.) Reference to an instance of <see cref="T:github_releaser.NewRelease"/></param>
         /// <param name="shouldNotZip">(Optional, default is false). Set to true to upload release assets individually rather than ZIPping the contents of the release asset dir.</param>
         /// that contains the required release information in its properties.
+        /// <param name="assetsZipName">Name to give to the zip file of the assets.  Ignored if <see cref="shouldNotZip"/> is set to true.</param>
+        /// <returns>True if the post succeeded and all assets got uploaded; false otherwise.</returns>
         /// <remarks>The <see cref="T:github_releaser.NewRelease"/> object is serialized to JSON and then posted to the GitHub Server.  This object is assumed to have valid information.
         /// To validate the information, call the <see cref="M:github_releaser.GitHubReleaeValidator.IsReleaseValid"/> method.</remarks>
-        public static void PostNewRelease(string repoName,
+        public static bool PostNewRelease(string repoName,
             string repoOwner, string userAccessToken, string releaseAssetDir,
-            NewRelease release, bool shouldNotZip = false)
+            NewRelease release, bool shouldNotZip = false, string assetsZipName = "assets.zip")
         {
             Console.WriteLine(Resources.PostingReleaseToWhichRepo, release.name, repoName);
 
@@ -48,76 +52,178 @@ namespace github_release_poster
 
             if (release == null)
                 throw new ArgumentNullException(nameof(release));
-
-            // Form the request body
-            var json = release.ToJson();
-
-            if (string.IsNullOrWhiteSpace(json))
+            try
             {
-                Console.WriteLine(Resources.FailedToFormatReleaseJson);
-                return;
-            }
+                // Form the request body
+                var json = release.ToJson();
 
-            Console.WriteLine(Resources.SendingPostRequestToCreateRelease, release.name);
-
-            // RestSharp code, big shout out to Postman app
-            var client = new RestClient(Resources.CreateReleaseApiPostURL);
-            var request = new RestRequest(Method.POST);
-            request.AddHeader(Resources.CacheControlHeaderName, Resources.NoCacheHeader);
-            request.AddHeader(Resources.AcceptHeaderName, Resources.GitHubApiV3Accept);
-            request.AddHeader(Resources.UserAgentHeaderName, Resources.TestAppUserAgent);
-            request.AddHeader(Resources.AuthorizationHeaderName, $"token {userAccessToken}");
-            request.AddParameter(Resources.UndefinedParameterName, json, ParameterType.RequestBody);
-            var response = client.Execute(request);
-
-            if (response == null)
-            {
-                Console.WriteLine("ERROR: Failed to post release.");
-                return;
-            }
-
-            var responseData = response.Content.FromJson();
-
-            // get the ID of the new release
-            Console.WriteLine($"Posted release {responseData.id} to {responseData.target_commitish}.");
-
-            Console.WriteLine(Resources.ProcessingReleaseAssets);
-
-            request = new RestRequest(Method.POST);
-            request.AddHeader("cache-control", "no-cache");
-            request.AddHeader("User-Agent", "test app");
-            request.AddHeader("Authorization", $"token {userAccessToken}");
-
-            // process the assets
-            // If the user has set shouldNotZip to false, zip up the release assets.
-            if (!shouldNotZip)
-            {
-                // Use GUIDs to name the zip and the folder to put it in.
-                var outputZipFilePath = $@"{Path.GetTempPath()}\{Guid.NewGuid()}\{Guid.NewGuid()}.zip";
-
-                if (!ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
+                if (string.IsNullOrWhiteSpace(json))
                 {
-                    Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
-                    return; // Failed to zip up the release files
+                    Console.WriteLine(Resources.FailedToFormatReleaseJson);
+                    return false;
                 }
 
-                client = new RestClient(
-                    string.Format(Resources.UploadAssetURL, responseData.assets_url, 
-                        Path.GetFileName(outputZipFilePath), Path.GetFileName(outputZipFilePath)));
+                Console.WriteLine(Resources.SendingPostRequestToCreateRelease, release.name);
 
-                request.AddHeader("Content-Type", Resources.ZipFileContentType);
-                request.AddParameter(Resources.ZipFileContentType, 
-                    File.ReadAllBytes(outputZipFilePath), ParameterType.RequestBody);
-                response = client.Execute(request);
+                var createReleaseUrl = string.Format(Resources.CreateReleaseApiPostURL, repoOwner, repoName);
 
-                // TODO: Add code here to post the ZIP file to the release using the upload URL
+                var client = new RestClient(createReleaseUrl);
+                var request = GitHubRequestFactory.PrepareGitHubRequest(Method.POST, userAccessToken);
+
+                request.AddHeader(Resources.AcceptHeaderName, Resources.GitHubApiV3Accept);
+                request.AddParameter(Resources.UndefinedParameterName, json, ParameterType.RequestBody);
+
+                var response = client.Execute(request);
+
+                if (response == null || response.StatusCode != HttpStatusCode.Created)
+                {
+                    Console.WriteLine("ERROR: Failed to post release.");
+                    return false;
+                }
+
+                var newRelease = response.Content.FromJson();
+
+                // get the ID of the new release
+                Console.WriteLine($"Posted release {newRelease.id} to {newRelease.target_commitish}.");
+
+                Console.WriteLine(Resources.ProcessingReleaseAssets);
+
+                request = GitHubRequestFactory.PrepareGitHubRequest(Method.POST, userAccessToken);
+
+                string uploadUrl = newRelease.upload_url;  // use type explicitly to cast so that extension methods work
+                if (string.IsNullOrWhiteSpace(uploadUrl))
+                {
+                    Console.WriteLine(Resources.UploadUrlNotObtainable);
+                    Environment.Exit(Resources.ERROR_NOT_OBTAINED_RELEASE_UPLOAD_URL);
+                }
+
+                // process the assets
+                // If the user has set shouldNotZip to false, zip up the release assets.
+                if (shouldNotZip)
+                {
+                    // Iterate over all the files in the release asset directory and its subdirectories,
+                    // one by one.  Flatten the directory tree into just a big ol' list of files.  To preserve
+                    // the directory tree, distribute the release assets in ZIP format and then have your
+                    // Setup program un zip the assets into their directory structure.
+                    foreach (var assetFile in FileSearcher.GetAllFilesInFolder(
+                        releaseAssetDir).Where(fsi => (fsi.Attributes & FileAttributes.Directory)
+                                                      != FileAttributes.Directory))
+                    {
+                        // Get just the name and extension of the asset for use in the
+                        // upload url later.  If blank is returned, then something went wrong.
+                        // In that case, just skip the current file.
+                        var assetFileName = Path.GetFileName(assetFile.FullName);
+                        if (string.IsNullOrWhiteSpace(assetFileName))
+                            continue;
+
+                        // Read all the bytes from the file into memory.  If we encounter a
+                        // zero-byte file, don't upload it.
+                        var fileBytes = File.ReadAllBytes(assetFile.FullName);
+                        if (fileBytes.Length == 0)
+                            continue; /* do not process empty files */
+
+                        var uploadUri = uploadUrl.ExpandUriTemplate(new
+                        {
+                            name = assetFileName,
+                            label = assetFileName
+                        });
+
+                        // Prepare a REST request with the upload url from the create release API response
+                        // above
+                        client = new RestClient(
+                            uploadUri
+                        );
+
+                        request.AddHeader(Resources.ContentTypeHeaderName,
+                            MimeMapping.GetMimeMapping(assetFile.FullName)
+                        );
+                        request.AddParameter(
+                            Resources.ApplicationOctetStreamMimeType, /* everything is an application/octet-stream */
+                            fileBytes, ParameterType.RequestBody
+                        );
+                        response = client.Execute(request);
+
+                        if (response == null || response.StatusCode != HttpStatusCode.Created)
+                        {
+                            Console.WriteLine(Resources.FailedToUploadAsset, assetFileName);
+                            Environment.Exit(Resources.ERROR_ASSET_NOT_ACCEPTED);
+                        }
+                        else
+                        {
+                            Console.WriteLine(Resources.AssetAccepted, assetFileName);
+                        }
+                    }
+                }
+                else
+                {
+                    // Use GUIDs to name the zip and the folder to put it in.
+                    // make a sub folder under the user's temp folder, and then inside that folder,
+                    // put the zipped up assets, naming the zip file as the user has specified.
+                    var outputZipFilePath = $@"{Path.GetTempPath()}\{Guid.NewGuid()}\{assetsZipName}";
+
+                    var outputZipFileName = Path.GetFileName(outputZipFilePath);
+
+                    if (!ZipperUpper.CompressDirectory(releaseAssetDir, outputZipFilePath))
+                    {
+                        Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
+                        return false; // Failed to zip up the release files
+                    }
+
+                    /* Determine whether the compression successfully completed.  Stop if it did not. */
+                    if (!File.Exists(outputZipFilePath))
+                    {
+                        Console.WriteLine(Resources.FailedToZipAssets, releaseAssetDir);
+                        Environment.Exit(Resources.ERROR_FAILED_TO_ZIP_ASSETS);
+                    }
+
+                    /* Determine whether the ZIP file is 2GB or bigger in size.  If it is, then stop.
+                     This is because GitHub API will not accept asset files bigger than 2 GB. */
+                    if (Convert.ToUInt64(new FileInfo(outputZipFilePath).Length) >= Resources.TwoGigaBytes)
+                    {
+                        Console.WriteLine(Resources.ZipFileTooBig, outputZipFilePath);
+                        Environment.Exit(Resources.ERROR_RELEASE_ASSET_IS_TOO_BIG);
+                    }
+
+                    /* If we are here, then read all the bytes from the file into memory. */
+                    var fileBytes = File.ReadAllBytes(outputZipFilePath);
+                    if (!fileBytes.Any())
+                        return false; // ZIP cannot be zero length
+
+                    var uploadUri = uploadUrl.ExpandUriTemplate(new { name = assetsZipName, label = assetsZipName });
+
+                    client = new RestClient(
+                        uploadUri
+                    );
+
+                    request.AddHeader(Resources.ContentTypeHeaderName,
+                        Resources.ZipFileContentType
+                    );
+
+                    request.AddParameter(Resources.ZipFileContentType,
+                        fileBytes, ParameterType.RequestBody
+                    );
+
+                    response = client.Execute(request);
+                    
+                    if (response == null || response.StatusCode != HttpStatusCode.Created)
+                    {
+                        Console.WriteLine(Resources.FailedToUploadAsset, outputZipFileName);
+                        Environment.Exit(Resources.ERROR_ASSET_NOT_ACCEPTED);
+                    }
+                    else
+                    {
+                        Console.WriteLine(Resources.AssetAccepted, outputZipFileName);
+                    }
+                }
+
+                Console.WriteLine(Resources.ReleasePostedToGitHub, newRelease.name);
+                return true;
             }
-            else
+            catch
             {
-                foreach (var assetFile in .)
+                Console.WriteLine(Resources.FailedToPackageReleaseForPosting);
+                return false;
             }
-
-            // done
         }
     }
 }

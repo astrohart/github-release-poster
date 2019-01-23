@@ -79,6 +79,33 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to application/octet-stream.
+        /// </summary>
+        public static string ApplicationOctetStreamMimeType {
+            get {
+                return ResourceManager.GetString("ApplicationOctetStreamMimeType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The asset &apos;{0}&apos; has been accepted by GitHub..
+        /// </summary>
+        public static string AssetAccepted {
+            get {
+                return ResourceManager.GetString("AssetAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to assets.zip.
+        /// </summary>
+        public static string AssetsZipName {
+            get {
+                return ResourceManager.GetString("AssetsZipName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorization.
         /// </summary>
         public static string AuthorizationHeaderName {
@@ -115,7 +142,16 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://api.github.com/repos/astrohart/NetworkKeeper/releases.
+        ///   Looks up a localized string similar to Content-Type.
+        /// </summary>
+        public static string ContentTypeHeaderName {
+            get {
+                return ResourceManager.GetString("ContentTypeHeaderName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://api.github.com/repos/{0}/{1}/releases.
         /// </summary>
         public static string CreateReleaseApiPostURL {
             get {
@@ -129,6 +165,56 @@ namespace github_release_poster.Properties {
         public static string DefaultTargetBranchIsMaster {
             get {
                 return ResourceManager.GetString("DefaultTargetBranchIsMaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Int32 similar to -108.
+        /// </summary>
+        public static int ERROR_ASSET_NOT_ACCEPTED {
+            get {
+                object obj = ResourceManager.GetObject("ERROR_ASSET_NOT_ACCEPTED", resourceCulture);
+                return ((int)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Int32 similar to -107.
+        /// </summary>
+        public static int ERROR_FAILED_TO_ZIP_ASSETS {
+            get {
+                object obj = ResourceManager.GetObject("ERROR_FAILED_TO_ZIP_ASSETS", resourceCulture);
+                return ((int)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Int32 similar to -106.
+        /// </summary>
+        public static int ERROR_NOT_OBTAINED_RELEASE_UPLOAD_URL {
+            get {
+                object obj = ResourceManager.GetObject("ERROR_NOT_OBTAINED_RELEASE_UPLOAD_URL", resourceCulture);
+                return ((int)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Int32 similar to -104.
+        /// </summary>
+        public static int ERROR_RELEASE_ASSET_DIR_NOT_EXISTS {
+            get {
+                object obj = ResourceManager.GetObject("ERROR_RELEASE_ASSET_DIR_NOT_EXISTS", resourceCulture);
+                return ((int)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Int32 similar to -105.
+        /// </summary>
+        public static int ERROR_RELEASE_ASSET_IS_TOO_BIG {
+            get {
+                object obj = ResourceManager.GetObject("ERROR_RELEASE_ASSET_IS_TOO_BIG", resourceCulture);
+                return ((int)(obj));
             }
         }
         
@@ -209,6 +295,24 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to upload asset &apos;{0}&apos;..
+        /// </summary>
+        public static string FailedToUploadAsset {
+            get {
+                return ResourceManager.GetString("FailedToUploadAsset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR: Unable to zip the assets in folder &apos;{0}&apos;..
+        /// </summary>
+        public static string FailedToZipAssets {
+            get {
+                return ResourceManager.GetString("FailedToZipAssets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to validate release metadata..
         /// </summary>
         public static string FailedValidateReleaseMetadata {
@@ -223,6 +327,51 @@ namespace github_release_poster.Properties {
         public static string GitHubApiV3Accept {
             get {
                 return ResourceManager.GetString("GitHubApiV3Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to token {0}.
+        /// </summary>
+        public static string GitHubAuthorizationHeaderContent {
+            get {
+                return ResourceManager.GetString("GitHubAuthorizationHeaderContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.7.3.
+        /// </summary>
+        public static string GitHubIndivAssetTestingReleaseName {
+            get {
+                return ResourceManager.GetString("GitHubIndivAssetTestingReleaseName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to github-release-poster by xyLOGIX.
+        /// </summary>
+        public static string GitHubReleasePosterUserAgent {
+            get {
+                return ResourceManager.GetString("GitHubReleasePosterUserAgent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0.7.4.
+        /// </summary>
+        public static string GitHubZipAssetsTestingReleaseName {
+            get {
+                return ResourceManager.GetString("GitHubZipAssetsTestingReleaseName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to \{\?([^}]+)\}.
+        /// </summary>
+        public static string HypermediaRelationUriTemplateRegex {
+            get {
+                return ResourceManager.GetString("HypermediaRelationUriTemplateRegex", resourceCulture);
             }
         }
         
@@ -277,6 +426,15 @@ namespace github_release_poster.Properties {
         public static string MASTER_BRANCH {
             get {
                 return ResourceManager.GetString("MASTER_BRANCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to master.
+        /// </summary>
+        public static string MasterBranchName {
+            get {
+                return ResourceManager.GetString("MasterBranchName", resourceCulture);
             }
         }
         
@@ -362,6 +520,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The GitHubReleasePoster.PostNewRelease method did not succeed..
+        /// </summary>
+        public static string PostReleaseTestNotSucceeded {
+            get {
+                return ResourceManager.GetString("PostReleaseTestNotSucceeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processing release assets....
         /// </summary>
         public static string ProcessingReleaseAssets {
@@ -407,6 +574,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ERROR: The release asset directory or one of its subfolders contains a file that is 2 GB or greater in size..
+        /// </summary>
+        public static string ReleaseAssetDirContainsTooBigFile {
+            get {
+                return ResourceManager.GetString("ReleaseAssetDirContainsTooBigFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ERROR: The release asset directory &apos;{0}&apos; could not be located.  Please check whether the directory exists..
         /// </summary>
         public static string ReleaseAssetDirNotFound {
@@ -416,11 +592,29 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The release metadata and assets are valid..
+        /// </summary>
+        public static string ReleaseAssetsAndMetadataValid {
+            get {
+                return ResourceManager.GetString("ReleaseAssetsAndMetadataValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Release assets come from folder &apos;{0}&apos;..
         /// </summary>
         public static string ReleaseAssetsComeFromFolder {
             get {
                 return ResourceManager.GetString("ReleaseAssetsComeFromFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release &apos;{0}&apos; and its assets have been posted to GitHub..
+        /// </summary>
+        public static string ReleasePostedToGitHub {
+            get {
+                return ResourceManager.GetString("ReleasePostedToGitHub", resourceCulture);
             }
         }
         
@@ -560,11 +754,48 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to test app.
+        ///   Looks up a localized string similar to C:\Users\ENS Brian Hart\Dropbox\Downloads\emu8086.
         /// </summary>
-        public static string TestAppUserAgent {
+        public static string TestingAssetsSourceDirPath {
             get {
-                return ResourceManager.GetString("TestAppUserAgent", resourceCulture);
+                return ResourceManager.GetString("TestingAssetsSourceDirPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NetworkKeeper.
+        /// </summary>
+        public static string TestingRepoName {
+            get {
+                return ResourceManager.GetString("TestingRepoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to astrohart.
+        /// </summary>
+        public static string TestingRepoOwner {
+            get {
+                return ResourceManager.GetString("TestingRepoOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 45df609c7cf621c7e75b7a7bf954b0a873934db8.
+        /// </summary>
+        public static string TestingUserToken {
+            get {
+                return ResourceManager.GetString("TestingUserToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.UInt64 similar to 2147483648.
+        /// </summary>
+        public static ulong TwoGigaBytes {
+            get {
+                object obj = ResourceManager.GetObject("TwoGigaBytes", resourceCulture);
+                return ((ulong)(obj));
             }
         }
         
@@ -583,6 +814,15 @@ namespace github_release_poster.Properties {
         public static string UploadAssetURL {
             get {
                 return ResourceManager.GetString("UploadAssetURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ERROR: Unable to get upload_url value from create release response..
+        /// </summary>
+        public static string UploadUrlNotObtainable {
+            get {
+                return ResourceManager.GetString("UploadUrlNotObtainable", resourceCulture);
             }
         }
         
@@ -696,6 +936,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Validating release metadata....
+        /// </summary>
+        public static string ValidatingReleaseMetadata {
+            get {
+                return ResourceManager.GetString("ValidatingReleaseMetadata", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to --version: This switch displays this program&apos;s name and version number, along with a copyright message.  If specified, the --version switch must appear by itself..
         /// </summary>
         public static string VERSION_SWITCH_USAGE {
@@ -719,6 +968,15 @@ namespace github_release_poster.Properties {
         public static string ZipFileContentType {
             get {
                 return ResourceManager.GetString("ZipFileContentType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The size of the &apos;{0}&apos; file is 2 GB or more in size.  GitHub won&apos;t accept it..
+        /// </summary>
+        public static string ZipFileTooBig {
+            get {
+                return ResourceManager.GetString("ZipFileTooBig", resourceCulture);
             }
         }
         

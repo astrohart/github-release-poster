@@ -272,17 +272,14 @@
   <data name="FailedToPackageReleaseForPosting" xml:space="preserve">
     <value>ERROR: Could not package release for posting.</value>
   </data>
-  <data name="CreateReleaseApiPostURL" xml:space="preserve">
-    <value>https://api.github.com/repos/astrohart/NetworkKeeper/releases</value>
-  </data>
   <data name="GitHubApiV3Accept" xml:space="preserve">
     <value>application/vnd.github.v3.raw</value>
   </data>
   <data name="NoCacheHeader" xml:space="preserve">
     <value>no-cache</value>
   </data>
-  <data name="TestAppUserAgent" xml:space="preserve">
-    <value>test app</value>
+  <data name="GitHubReleasePosterUserAgent" xml:space="preserve">
+    <value>github-release-poster by xyLOGIX</value>
   </data>
   <data name="FailedToFormatReleaseJson" xml:space="preserve">
     <value>ERROR: Failed to format the JSON of the create-release request body.</value>
@@ -346,5 +343,92 @@
   </data>
   <data name="UploadAssetURL" xml:space="preserve">
     <value>{0}?name={1}&amp;label={2}</value>
+  </data>
+  <data name="ApplicationOctetStreamMimeType" xml:space="preserve">
+    <value>application/octet-stream</value>
+  </data>
+  <data name="ContentTypeHeaderName" xml:space="preserve">
+    <value>Content-Type</value>
+  </data>
+  <data name="AssetsZipName" xml:space="preserve">
+    <value>assets.zip</value>
+  </data>
+  <data name="HypermediaRelationUriTemplateRegex" xml:space="preserve">
+    <value>\{\?([^}]+)\}</value>
+  </data>
+  <data name="GitHubAuthorizationHeaderContent" xml:space="preserve">
+    <value>token {0}</value>
+  </data>
+  <data name="CreateReleaseApiPostURL" xml:space="preserve">
+    <value>https://api.github.com/repos/{0}/{1}/releases</value>
+  </data>
+  <data name="GitHubIndivAssetTestingReleaseName" xml:space="preserve">
+    <value>0.7.3</value>
+  </data>
+  <data name="MasterBranchName" xml:space="preserve">
+    <value>master</value>
+  </data>
+  <data name="GitHubZipAssetsTestingReleaseName" xml:space="preserve">
+    <value>0.7.4</value>
+  </data>
+  <data name="TestingAssetsSourceDirPath" xml:space="preserve">
+    <value>C:\Users\ENS Brian Hart\Dropbox\Downloads\emu8086</value>
+  </data>
+  <data name="TestingUserToken" xml:space="preserve">
+    <value>45df609c7cf621c7e75b7a7bf954b0a873934db8</value>
+  </data>
+  <data name="TestingRepoOwner" xml:space="preserve">
+    <value>astrohart</value>
+  </data>
+  <data name="TestingRepoName" xml:space="preserve">
+    <value>NetworkKeeper</value>
+  </data>
+  <data name="PostReleaseTestNotSucceeded" xml:space="preserve">
+    <value>The GitHubReleasePoster.PostNewRelease method did not succeed.</value>
+  </data>
+  <data name="ERROR_RELEASE_ASSET_DIR_NOT_EXISTS" type="System.Int32, mscorlib">
+    <value>-104</value>
+  </data>
+  <data name="ReleaseAssetDirContainsTooBigFile" xml:space="preserve">
+    <value>ERROR: The release asset directory or one of its subfolders contains a file that is 2 GB or greater in size.</value>
+  </data>
+  <data name="ERROR_RELEASE_ASSET_IS_TOO_BIG" type="System.Int32, mscorlib">
+    <value>-105</value>
+  </data>
+  <data name="TwoGigaBytes" type="System.UInt64, mscorlib">
+    <value>2147483648</value>
+  </data>
+  <data name="ReleaseAssetsAndMetadataValid" xml:space="preserve">
+    <value>The release metadata and assets are valid.</value>
+  </data>
+  <data name="UploadUrlNotObtainable" xml:space="preserve">
+    <value>ERROR: Unable to get upload_url value from create release response.</value>
+  </data>
+  <data name="ERROR_NOT_OBTAINED_RELEASE_UPLOAD_URL" type="System.Int32, mscorlib">
+    <value>-106</value>
+  </data>
+  <data name="ERROR_FAILED_TO_ZIP_ASSETS" type="System.Int32, mscorlib">
+    <value>-107</value>
+  </data>
+  <data name="FailedToZipAssets" xml:space="preserve">
+    <value>ERROR: Unable to zip the assets in folder '{0}'.</value>
+  </data>
+  <data name="ValidatingReleaseMetadata" xml:space="preserve">
+    <value>Validating release metadata...</value>
+  </data>
+  <data name="ZipFileTooBig" xml:space="preserve">
+    <value>The size of the '{0}' file is 2 GB or more in size.  GitHub won't accept it.</value>
+  </data>
+  <data name="ReleasePostedToGitHub" xml:space="preserve">
+    <value>Release '{0}' and its assets have been posted to GitHub.</value>
+  </data>
+  <data name="FailedToUploadAsset" xml:space="preserve">
+    <value>Failed to upload asset '{0}'.</value>
+  </data>
+  <data name="ERROR_ASSET_NOT_ACCEPTED" type="System.Int32, mscorlib">
+    <value>-108</value>
+  </data>
+  <data name="AssetAccepted" xml:space="preserve">
+    <value>The asset '{0}' has been accepted by GitHub.</value>
   </data>
 </root>
