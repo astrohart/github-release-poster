@@ -8,6 +8,12 @@ namespace github_release_poster_tests
     public class GitHubReleasePosterTests
     {
         /// <summary>
+        /// Put your user access token that is used with GitHub here, for testing.  If there is a token here, it has
+        /// most likely already been revoked, so don't think you can use it.
+        /// </summary>
+        private const string MyUserAccessToken = "<your-user-token-here>";
+
+        /// <summary>
         /// Tests the GitHubReleasePoster class, and it tells it to zip up the assets before uploading.
         /// </summary>
         /// <remarks>
@@ -21,7 +27,7 @@ namespace github_release_poster_tests
             var result = GitHubReleasePoster.PostNewRelease(
                 Resources.TestingRepoName,
                 Resources.TestingRepoOwner,
-                Resources.TestingUserToken,
+                MyUserAccessToken,
                 Resources.TestingAssetsSourceDirPath,
                 NewReleaseFactory.CreateNewRelease(
                     string.Empty,   /* Pass in something different to test the body */
@@ -44,7 +50,7 @@ namespace github_release_poster_tests
             var result = GitHubReleasePoster.PostNewRelease(
                 Resources.TestingRepoName,
                 Resources.TestingRepoOwner,
-                Resources.TestingUserToken,
+                MyUserAccessToken,
                 Resources.TestingAssetsSourceDirPath,
                 NewReleaseFactory.CreateNewRelease(
                     string.Empty,   /* Pass in something different to test the body */

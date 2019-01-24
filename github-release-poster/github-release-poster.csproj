@@ -81,8 +81,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="Tavis.UriTemplates, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Tavis.UriTemplates.1.1.1\lib\Net45\Tavis.UriTemplates.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssetUploader.cs" />
     <Compile Include="CommandLineInfo.cs" />
     <Compile Include="DebuggerDump.cs" />
     <Compile Include="DebugLevel.cs" />
@@ -111,7 +115,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="GitHubRequestFactory.cs" />
-    <Compile Include="StringExtensions.cs" />
     <Compile Include="ZipperUpper.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -374,9 +374,6 @@
   <data name="TestingAssetsSourceDirPath" xml:space="preserve">
     <value>C:\Users\ENS Brian Hart\Dropbox\Downloads\emu8086</value>
   </data>
-  <data name="TestingUserToken" xml:space="preserve">
-    <value>45df609c7cf621c7e75b7a7bf954b0a873934db8</value>
-  </data>
   <data name="TestingRepoOwner" xml:space="preserve">
     <value>astrohart</value>
   </data>
@@ -430,5 +427,11 @@
   </data>
   <data name="AssetAccepted" xml:space="preserve">
     <value>The asset '{0}' has been accepted by GitHub.</value>
+  </data>
+  <data name="DirectoryNotFound" xml:space="preserve">
+    <value>The directory '{0}' could not be located.</value>
+  </data>
+  <data name="AssetZipProcessResultedInZeroSizePackage" xml:space="preserve">
+    <value>$The asset compression process has resulted in a package that has zero size.</value>
   </data>
 </root>

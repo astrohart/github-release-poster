@@ -106,6 +106,15 @@ namespace github_release_poster.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to $The asset compression process has resulted in a package that has zero size..
+        /// </summary>
+        public static string AssetZipProcessResultedInZeroSizePackage {
+            get {
+                return ResourceManager.GetString("AssetZipProcessResultedInZeroSizePackage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Authorization.
         /// </summary>
         public static string AuthorizationHeaderName {
@@ -165,6 +174,15 @@ namespace github_release_poster.Properties {
         public static string DefaultTargetBranchIsMaster {
             get {
                 return ResourceManager.GetString("DefaultTargetBranchIsMaster", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The directory &apos;{0}&apos; could not be located..
+        /// </summary>
+        public static string DirectoryNotFound {
+            get {
+                return ResourceManager.GetString("DirectoryNotFound", resourceCulture);
             }
         }
         
@@ -777,15 +795,6 @@ namespace github_release_poster.Properties {
         public static string TestingRepoOwner {
             get {
                 return ResourceManager.GetString("TestingRepoOwner", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 45df609c7cf621c7e75b7a7bf954b0a873934db8.
-        /// </summary>
-        public static string TestingUserToken {
-            get {
-                return ResourceManager.GetString("TestingUserToken", resourceCulture);
             }
         }
         

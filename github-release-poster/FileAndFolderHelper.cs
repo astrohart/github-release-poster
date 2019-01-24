@@ -156,6 +156,20 @@ namespace github_release_poster
             DebugUtils.WriteLine(DebugLevel.Debug, "FileAndFolderHelper.DeleteDirIfExists: Done.");
         }
 
+        /// <summary>
+        /// Determines whether the file specified in the <see cref="fileInfo"/> parameter has zero length.
+        /// </summary>
+        /// <param name="fileInfo">Reference to an instance of <see cref="T:System.IO.FileInfo"/> that refers to the file to check.</param>
+        /// <returns>True if the file's length is zero bytes; false otherwise.</returns>
+        /// <exception cref="T:System.ArgumentNullException">Thrown if the <see cref="fileInfo"/> parameter has a null reference.</exception>
+        public static bool FileHasZeroLength(FileInfo fileInfo)
+        {
+            if (fileInfo == null)
+                throw new ArgumentNullException(nameof(fileInfo));
+
+            return fileInfo.Length == 0;
+        }
+
         public static List<string> GetFilesInFolder(string folder)
         {
             // write the name of the current class and method we are now entering, into the log
