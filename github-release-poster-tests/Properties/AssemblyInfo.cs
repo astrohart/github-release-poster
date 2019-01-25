@@ -4,12 +4,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("github-release-poster-tests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("xyLOGIX GitHub Release Poster Tests Liibrary")]
+[assembly: AssemblyDescription("Unit tests library for the github-release-poster tool")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("github-release-poster-tests")]
-[assembly: AssemblyCopyright("Copyright ©  2019")]
+[assembly: AssemblyCompany("xyLOGIX, LLC")]
+[assembly: AssemblyProduct("xyLOGIX GitHub Release Poster Tests Liibrary")]
+[assembly: AssemblyCopyright("Copyright ©  2019 xyLOGIX, LLC.  All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
