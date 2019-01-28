@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace GitHubReleasePoster.Tests.Extensions
 {
     /// <summary>
-    /// Unit tests for the <see cref="T:TestNinja.Extensions.FileSystemInfoExtensions"/> class.
+    /// Unit tests for the <see cref="T:GitHubReleasePoster.Extensions.FileSystemInfoExtensions"/> class.
     /// </summary>
     [TestFixture]
     public class FileSystemInfoExtensionsTests

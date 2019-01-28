@@ -21,7 +21,7 @@ namespace GitHubReleasePoster.Tests.Searchers
         }
 
         /// <summary>
-        /// Tests whether the <see cref="T:TestNinja.Searchers.FileSystemSearcher.Search"/> method
+        /// Tests whether the <see cref="T:GitHubReleasePoster.Searchers.FileSystemSearcher.Search"/> method
         /// throws a <see cref="T:System.IO.DirectoryNotFoundException"/> when we specify a gibberish
         /// name for the directory to list files in.
         /// </summary>
@@ -33,7 +33,7 @@ namespace GitHubReleasePoster.Tests.Searchers
         }
 
         /// <summary>
-        /// Tests whether the <see cref="T:TestNinja.Searchers.FileSystemSearcher.Search"/> method
+        /// Tests whether the <see cref="T:GitHubReleasePoster.Searchers.FileSystemSearcher.Search"/> method
         /// only returns the pathnames of files, and not folders, in the specified directory.
         /// </summary>
         [Test]
@@ -44,7 +44,7 @@ namespace GitHubReleasePoster.Tests.Searchers
         }
 
         /// <summary>
-        /// Tests whether the <see cref="T:TestNinja.Searchers.FileSystemSearcher.Search"/> method
+        /// Tests whether the <see cref="T:GitHubReleasePoster.Searchers.FileSystemSearcher.Search"/> method
         /// only returns file path names when we are searching just the top directory level only.
         /// </summary>
         [Test]
