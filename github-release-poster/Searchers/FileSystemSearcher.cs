@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using GitHubReleasePoster.Enumerables;
+using GitHubReleasePoster.Extensions;
 
 namespace GitHubReleasePoster.Searchers
 {
