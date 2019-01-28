@@ -1,0 +1,3 @@
+[submodule "github-release-poster/Enumerables"]
+	path = github-release-poster/Enumerables
+	url = https://github.com/astrohart/FileSystemEnumerable.git

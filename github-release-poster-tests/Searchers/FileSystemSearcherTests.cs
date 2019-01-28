@@ -1,4 +1,7 @@
 ﻿using System.IO;
+using System.Linq;
+using GitHubReleasePoster.Extensions;
+using GitHubReleasePoster.Searchers;
 using NUnit.Framework;
 
 namespace GitHubReleasePoster.Tests.Searchers
