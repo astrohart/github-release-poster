@@ -11,9 +11,9 @@ namespace GitHubReleasePoster
         /// Entry point of the application.
         /// </summary>
         /// <param name="args">Array of strings, one element for each command-line argument passed.</param>
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
-            Environment.Exit(0);            // completed successfully
+            return 0;
         }
     }
 }
