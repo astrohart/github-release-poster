@@ -428,6 +428,12 @@ namespace GitHubReleasePoster.Tests.EndToEnd
                     && !predicate(release))
                     continue;
 
+                // Before deleting the release, delete all its assets
+                foreach(var asset in await client.Repository.Release.GetAllAssets(
+                    repoOwner, RepoName, release.Id)){
+                    await client.Repository.Release.DeleteAsset(repoOwner, RepoName, asset.Id);
+                }
+
                 await client.Repository.Release.Delete(repoOwner, RepoName,
                     release.Id);
             }
