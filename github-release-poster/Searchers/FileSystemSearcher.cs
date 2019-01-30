@@ -30,6 +30,8 @@ namespace GitHubReleasePoster.Searchers
             if (!Directory.Exists(directory))
                 throw new DirectoryNotFoundException($"The folder '{directory}' could not be located.");
 
+            // we only want files, but sometimes entries with Folder attributes get returned,
+            // so we filter out all the entries returned that are for Folders.
             var result =
                 new FileSystemEnumerable(
                     new DirectoryInfo(directory),
