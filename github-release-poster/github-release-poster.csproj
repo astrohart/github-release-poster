@@ -39,6 +39,11 @@
   <ItemGroup>
     <Compile Include="Enumerables\FileSystemEnumerable.cs" />
     <Compile Include="Extensions\FileSystemInfoExtensions.cs" />
+    <Compile Include="Factories\AssetFactory.cs" />
+    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Interfaces\IAsset.cs" />
+    <Compile Include="Interfaces\IRelease.cs" />
+    <Compile Include="Models\Release.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Searchers\FileSystemSearcher.cs" />
