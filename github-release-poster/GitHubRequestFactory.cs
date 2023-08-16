@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using github_release_poster.Properties;
 using RestSharp;
 
