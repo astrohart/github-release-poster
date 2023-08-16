@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using github_release_poster;
 using NUnit.Framework;
 

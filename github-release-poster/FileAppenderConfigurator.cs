@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using log4net.Appender;
 
 namespace github_release_poster

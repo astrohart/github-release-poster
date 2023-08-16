@@ -1,4 +1,4 @@
-﻿using github_release_poster.Properties;
+using github_release_poster.Properties;
 using System;
 using System.Diagnostics;
 using System.Reflection;

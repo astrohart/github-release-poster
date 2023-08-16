@@ -1,4 +1,4 @@
-﻿using github_release_poster;
+using github_release_poster;
 using NUnit.Framework;
 using System;
 using Resources = github_release_poster_tests.Properties.Resources;

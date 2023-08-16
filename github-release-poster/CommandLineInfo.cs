@@ -1,4 +1,4 @@
-﻿using github_release_poster.Properties;
+using github_release_poster.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;

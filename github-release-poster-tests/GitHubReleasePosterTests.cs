@@ -1,4 +1,4 @@
-﻿using github_release_poster;
+using github_release_poster;
 using github_release_poster.Properties;
 using NUnit.Framework;
 
