@@ -1,4 +1,4 @@
-using github_release_poster.Properties;
+﻿using github_release_poster.Properties;
 using System;
 using System.Diagnostics;
 using System.Reflection;
@@ -15,9 +15,7 @@ namespace github_release_poster
             // Examine the command line for valid inputs, and fill the properties of the
             // CommandLineInfo object accordingly.
             if (!CommandLineInfo.Instance.ParseCommandLine(args))
-            {
                 Environment.Exit(Resources.FAILED_TO_PARSE_COMMAND_LINE);
-            }
 
             // Take action based on what the user passed on the command line.
             if (!ProcessCommandLine())
@@ -56,30 +54,42 @@ namespace github_release_poster
             Console.WriteLine(Resources.NO_ZIP_SWITCH_USAGE);
             Console.WriteLine();
             Console.WriteLine(Resources.SwitchRequired, Resources.NAME_SWITCH);
-            Console.WriteLine(Resources.SwitchRequired, Resources.RELEASE_ASSET_DIR_SWITCH);
-            Console.WriteLine(Resources.SwitchRequired, Resources.TAG_NAME_SWITCH);
-            Console.WriteLine(Resources.SwitchRequired, Resources.TARGET_BRANCH_SWITCH);
-            Console.WriteLine(Resources.SwitchRequired, Resources.USER_ACCESS_TOKEN_SWITCH);
-            Console.WriteLine(Resources.SwitchRequired, Resources.REPO_NAME_SWITCH);
-            Console.WriteLine(Resources.SwitchRequired, Resources.REPO_OWNER_SWITCH);
+            Console.WriteLine(
+                Resources.SwitchRequired, Resources.RELEASE_ASSET_DIR_SWITCH
+            );
+            Console.WriteLine(
+                Resources.SwitchRequired, Resources.TAG_NAME_SWITCH
+            );
+            Console.WriteLine(
+                Resources.SwitchRequired, Resources.TARGET_BRANCH_SWITCH
+            );
+            Console.WriteLine(
+                Resources.SwitchRequired, Resources.USER_ACCESS_TOKEN_SWITCH
+            );
+            Console.WriteLine(
+                Resources.SwitchRequired, Resources.REPO_NAME_SWITCH
+            );
+            Console.WriteLine(
+                Resources.SwitchRequired, Resources.REPO_OWNER_SWITCH
+            );
         }
 
         public static void PrintVersionNumber()
         {
             var execAssembly = Assembly.GetCallingAssembly();
-            var fileVersionInfo = FileVersionInfo.GetVersionInfo(execAssembly.Location);
+            var fileVersionInfo =
+                FileVersionInfo.GetVersionInfo(execAssembly.Location);
 
             var name = execAssembly.GetName();
 
-            Console.WriteLine(Resources.VersionString,
-                name.Name.Replace(".exe", string.Empty),
-                name.Version);
+            Console.WriteLine(
+                Resources.VersionString,
+                name.Name.Replace(".exe", string.Empty), name.Version
+            );
             Console.WriteLine(fileVersionInfo.LegalCopyright);
         }
 
-        /// <summary>
-        /// Clears all output from the user's console.
-        /// </summary>
+        /// <summary> Clears all output from the user's console. </summary>
         public static void SafeClearConsole()
         {
             try
@@ -93,33 +103,33 @@ namespace github_release_poster
         }
 
         /// <summary>
-        /// Called to examine the properties of the <see cref="T:github_release_poster.CommandLineInfo"/> object
-        /// and then take appropriate action.
+        /// Called to examine the properties of the
+        /// <see cref="T:github_release_poster.CommandLineInfo" /> object and then take
+        /// appropriate action.
         /// </summary>
         /// <returns>True if the command line was processed successfully; false otherwise.</returns>
         private static bool ProcessCommandLine()
         {
             if (CommandLineInfo.Instance.ShouldDisplayVersion)
-            {
+
                 // By now, we've already displayed the version number of the program
                 // to the user as called for by the --version switch.  So, we are done.
                 return true;
-            }
 
             var newRelease = NewReleaseFactory.CreateNewRelease(
-                CommandLineInfo.Instance.Body,
-                CommandLineInfo.Instance.IsDraft,
+                CommandLineInfo.Instance.Body, CommandLineInfo.Instance.IsDraft,
                 CommandLineInfo.Instance.Name,
                 CommandLineInfo.Instance.IsPreRelease,
                 CommandLineInfo.Instance.TagName,
                 CommandLineInfo.Instance.TargetBranch
             );
 
-            if (!GitHubReleaseValidator.IsReleaseValid(newRelease,
-                CommandLineInfo.Instance.RepoName,
-                CommandLineInfo.Instance.RepoOwner,
-                CommandLineInfo.Instance.UserAccessToken,
-                CommandLineInfo.Instance.ReleaseAssetDir))
+            if (!GitHubReleaseValidator.IsReleaseValid(
+                    newRelease, CommandLineInfo.Instance.RepoName,
+                    CommandLineInfo.Instance.RepoOwner,
+                    CommandLineInfo.Instance.UserAccessToken,
+                    CommandLineInfo.Instance.ReleaseAssetDir
+                ))
             {
                 Console.WriteLine(Resources.FailedValidateReleaseMetadata);
                 return false; // Failed to validate release information
@@ -129,8 +139,7 @@ namespace github_release_poster
                 CommandLineInfo.Instance.RepoName,
                 CommandLineInfo.Instance.RepoOwner,
                 CommandLineInfo.Instance.UserAccessToken,
-                CommandLineInfo.Instance.ReleaseAssetDir,
-                newRelease
+                CommandLineInfo.Instance.ReleaseAssetDir, newRelease
             );
 
             return true;

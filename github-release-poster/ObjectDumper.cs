@@ -1,4 +1,4 @@
-//Copyright (C) Microsoft Corporation.  All rights reserved.
+﻿//Copyright (C) Microsoft Corporation.  All rights reserved.
 
 using System;
 using System.Collections;
@@ -18,14 +18,10 @@ namespace github_release_poster
         private TextWriter writer;
 
         private ObjectDumper(int depth)
-        {
-            this.depth = depth;
-        }
+            => this.depth = depth;
 
         public static void Write(object element, int depth = 0)
-        {
-            Write(element, depth, Console.Out);
-        }
+            => Write(element, depth, Console.Out);
 
         public static void Write(object element, int depth, TextWriter log)
         {
@@ -34,9 +30,7 @@ namespace github_release_poster
         }
 
         public static void WriteLine(object element, int depth = 0)
-        {
-            WriteLine(element, depth, Console.Out);
-        }
+            => WriteLine(element, depth, Console.Out);
 
         public static void WriteLine(object element, int depth, TextWriter log)
         {
@@ -79,17 +73,13 @@ namespace github_release_poster
                 if (enumerableElement != null)
                 {
                     foreach (var item in enumerableElement)
-                    {
                         if (item is IEnumerable && !(item is string))
                         {
                             WriteIndent();
                             Write(prefix);
                             Write("...");
                             WriteLine();
-                            if (level >= depth)
-                            {
-                                continue;
-                            }
+                            if (level >= depth) continue;
                             level++;
                             WriteObject(prefix, item);
                             level--;
@@ -98,11 +88,14 @@ namespace github_release_poster
                         {
                             WriteObject(prefix, item);
                         }
-                    }
                 }
                 else
                 {
-                    var members = element.GetType().GetMembers(BindingFlags.Public | BindingFlags.Instance);
+                    var members = element.GetType()
+                                         .GetMembers(
+                                             BindingFlags.Public |
+                                             BindingFlags.Instance
+                                         );
                     WriteIndent();
                     Write(prefix);
                     var propWritten = false;
@@ -112,45 +105,45 @@ namespace github_release_poster
                         var p = m as PropertyInfo;
                         if (f == null && p == null) continue;
                         if (propWritten)
-                        {
                             WriteTab();
-                        }
                         else
-                        {
                             propWritten = true;
-                        }
                         Write(m.Name);
                         Write("=");
                         var t = f != null ? f.FieldType : p.PropertyType;
                         if (t.IsValueType || t == typeof(string))
                         {
-                            WriteValue(f != null ? f.GetValue(element) : p.GetValue(element, null));
+                            WriteValue(
+                                f != null
+                                    ? f.GetValue(element)
+                                    : p.GetValue(element, null)
+                            );
                         }
                         else
                         {
                             if (typeof(IEnumerable).IsAssignableFrom(t))
-                            {
                                 Write("...");
-                            }
                             else
-                            {
                                 Write("{ }");
-                            }
                         }
                     }
+
                     if (propWritten) WriteLine();
                     if (level < depth)
-                    {
                         foreach (var m in members)
                         {
                             var f = m as FieldInfo;
                             var p = m as PropertyInfo;
                             if (f != null || p != null)
                             {
-                                var t = f != null ? f.FieldType : p.PropertyType;
+                                var t = f != null
+                                    ? f.FieldType
+                                    : p.PropertyType;
                                 if (!(t.IsValueType || t == typeof(string)))
                                 {
-                                    var value = f != null ? f.GetValue(element) : p.GetValue(element, null);
+                                    var value = f != null
+                                        ? f.GetValue(element)
+                                        : p.GetValue(element, null);
                                     if (value != null)
                                     {
                                         level++;
@@ -160,7 +153,6 @@ namespace github_release_poster
                                 }
                             }
                         }
-                    }
                 }
             }
         }
@@ -180,17 +172,13 @@ namespace github_release_poster
                 if (enumerableElement != null)
                 {
                     foreach (var item in enumerableElement)
-                    {
                         if (item is IEnumerable && !(item is string))
                         {
                             WriteLine();
                             Write(prefix);
                             Write("...");
                             WriteLine();
-                            if (level >= depth)
-                            {
-                                continue;
-                            }
+                            if (level >= depth) continue;
                             level++;
                             WriteObjectToLines(prefix, item);
                             level--;
@@ -199,11 +187,14 @@ namespace github_release_poster
                         {
                             WriteObjectToLines(prefix, item);
                         }
-                    }
                 }
                 else
                 {
-                    var members = element.GetType().GetMembers(BindingFlags.Public | BindingFlags.Instance);
+                    var members = element.GetType()
+                                         .GetMembers(
+                                             BindingFlags.Public |
+                                             BindingFlags.Instance
+                                         );
                     WriteLine();
                     Write(prefix);
                     var propWritten = false;
@@ -213,48 +204,53 @@ namespace github_release_poster
                         var p = m as PropertyInfo;
                         if (f == null && p == null) continue;
                         if (propWritten)
-                        {
                             WriteLine();
-                        }
                         else
-                        {
                             propWritten = true;
-                        }
                         Write(m.Name);
                         Write("=");
                         var t = f != null ? f.FieldType : p.PropertyType;
                         if (t.IsValueType || t == typeof(string))
-                        {
-                            WriteValue(f != null ? f.GetValue(element) : p.GetValue(element, null));
-                        }
+                            WriteValue(
+                                f != null
+                                    ? f.GetValue(element)
+                                    : p.GetValue(element, null)
+                            );
                         else
-                        {
-                            Write(typeof(IEnumerable).IsAssignableFrom(t) ? "..." : "{ }");
-                        }
+                            Write(
+                                typeof(IEnumerable).IsAssignableFrom(t)
+                                    ? "..."
+                                    : "{ }"
+                            );
                     }
+
                     if (propWritten) WriteLine();
                     if (level < depth)
-                    {
                         foreach (var m in members)
                         {
                             var f = m as FieldInfo;
                             var p = m as PropertyInfo;
                             if (f != null || p != null)
                             {
-                                var t = f != null ? f.FieldType : p.PropertyType;
+                                var t = f != null
+                                    ? f.FieldType
+                                    : p.PropertyType;
                                 if (!(t.IsValueType || t == typeof(string)))
                                 {
-                                    var value = f != null ? f.GetValue(element) : p.GetValue(element, null);
+                                    var value = f != null
+                                        ? f.GetValue(element)
+                                        : p.GetValue(element, null);
                                     if (value != null)
                                     {
                                         level++;
-                                        WriteObjectToLines(m.Name + ": ", value);
+                                        WriteObjectToLines(
+                                            m.Name + ": ", value
+                                        );
                                         level--;
                                     }
                                 }
                             }
                         }
-                    }
                 }
             }
         }
@@ -268,25 +264,15 @@ namespace github_release_poster
         private void WriteValue(object o)
         {
             if (o == null)
-            {
                 Write("null");
-            }
             else if (o is DateTime)
-            {
                 Write(((DateTime)o).ToShortDateString());
-            }
             else if (o is ValueType || o is string)
-            {
                 Write(o.ToString());
-            }
             else if (o is IEnumerable)
-            {
                 Write("...");
-            }
             else
-            {
                 Write("{ }");
-            }
         }
     }
 }

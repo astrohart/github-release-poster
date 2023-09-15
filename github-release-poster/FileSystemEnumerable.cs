@@ -1,4 +1,4 @@
-using log4net;
+﻿using log4net;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,25 +12,39 @@ namespace github_release_poster
     // <https://stackoverflow.com/questions/13130052/directoryinfo-enumeratefiles-causes-unauthorizedaccessexception-and-other>
     public class FileSystemEnumerable : IEnumerable<FileSystemInfo>
     {
-        private readonly ILog _logger = LogManager.GetLogger(typeof(FileSystemEnumerable));
+        private readonly ILog _logger =
+            LogManager.GetLogger(typeof(FileSystemEnumerable));
+
         private readonly SearchOption _option;
         private readonly IList<string> _patterns;
         private readonly DirectoryInfo _root;
 
-        ///<summary>
-        /// Constructs a new instance of <see cref="T:github_release_poster.FileSystemEnumerable"/> and returns a reference to it.
-        ///</summary>
-        public FileSystemEnumerable(DirectoryInfo root, string pattern, SearchOption option)
+        /// <summary>
+        /// Constructs a new instance of
+        /// <see cref="T:github_release_poster.FileSystemEnumerable" /> and returns a
+        /// reference to it.
+        /// </summary>
+        public FileSystemEnumerable(
+            DirectoryInfo root,
+            string pattern,
+            SearchOption option
+        )
         {
             _root = root;
             _patterns = new List<string> { pattern };
             _option = option;
         }
 
-        ///<summary>
-        /// Constructs a new instance of <see cref="T:github_release_poster.FileSystemEnumerable"/> and returns a reference to it.
-        ///</summary>
-        public FileSystemEnumerable(DirectoryInfo root, IList<string> patterns, SearchOption option)
+        /// <summary>
+        /// Constructs a new instance of
+        /// <see cref="T:github_release_poster.FileSystemEnumerable" /> and returns a
+        /// reference to it.
+        /// </summary>
+        public FileSystemEnumerable(
+            DirectoryInfo root,
+            IList<string> patterns,
+            SearchOption option
+        )
         {
             _root = root;
             _patterns = patterns;
@@ -48,22 +62,39 @@ namespace github_release_poster
 
             try
             {
-                _logger.DebugFormat($"Attempting to enumerate '{_root.FullName}'");
+                _logger.DebugFormat(
+                    $"Attempting to enumerate '{_root.FullName}'"
+                );
                 foreach (var pattern in _patterns)
                 {
                     _logger.DebugFormat($"Using pattern '{pattern}'");
-                    matches = matches.Concat(_root.EnumerateDirectories(pattern, SearchOption.TopDirectoryOnly))
-                        .Concat(_root.EnumerateFiles(pattern, SearchOption.TopDirectoryOnly));
+                    matches = matches.Concat(
+                                         _root.EnumerateDirectories(
+                                             pattern,
+                                             SearchOption.TopDirectoryOnly
+                                         )
+                                     )
+                                     .Concat(
+                                         _root.EnumerateFiles(
+                                             pattern,
+                                             SearchOption.TopDirectoryOnly
+                                         )
+                                     );
                 }
             }
             catch (UnauthorizedAccessException)
             {
-                _logger.WarnFormat($"Unable to access '{_root.FullName}'. Skipping...");
+                _logger.WarnFormat(
+                    $"Unable to access '{_root.FullName}'. Skipping..."
+                );
                 yield break;
             }
             catch (PathTooLongException ptle)
             {
-                _logger.Warn($@"Could not process path '{_root.Parent?.FullName}\{_root.Name}'.", ptle);
+                _logger.Warn(
+                    $@"Could not process path '{_root.Parent?.FullName}\{_root.Name}'.",
+                    ptle
+                );
                 yield break;
             }
             catch (IOException e)
@@ -72,45 +103,49 @@ namespace github_release_poster
                 // "The specified network name is no longer available."
                 _logger.Warn(
                     $@"Could not process path (check SymlinkEvaluation rules)'{_root.Parent?.FullName}\{_root.Name}'.",
-                    e);
+                    e
+                );
                 yield break;
             }
             catch
             {
                 // All other exceptions -- just skip it
                 _logger.Warn(
-                    @"Caught an unknown exception.  Perhaps we have stumbled upon a file or directory which is protected by the operating system.");
+                    @"Caught an unknown exception.  Perhaps we have stumbled upon a file or directory which is protected by the operating system."
+                );
                 yield break;
             }
 
-            _logger.DebugFormat($"Returning all objects that match the pattern(s) '{string.Join(",", _patterns)}'");
+            _logger.DebugFormat(
+                $"Returning all objects that match the pattern(s) '{string.Join(",", _patterns)}'"
+            );
             foreach (var file in matches)
-            {
                 if (file != null)
                     yield return file;
-            }
 
             if (_option != SearchOption.AllDirectories)
                 yield break;
 
             _logger.DebugFormat("Enumerating all child directories.");
-            foreach (var dir in _root.EnumerateDirectories("*", SearchOption.TopDirectoryOnly))
+            foreach (var dir in _root.EnumerateDirectories(
+                         "*", SearchOption.TopDirectoryOnly
+                     ))
             {
                 _logger.DebugFormat($"Enumerating '{dir.FullName}'");
-                var fileSystemInfos = new FileSystemEnumerable(dir, _patterns, _option);
+                var fileSystemInfos =
+                    new FileSystemEnumerable(dir, _patterns, _option);
                 foreach (var match in fileSystemInfos)
-                {
                     if (match != null)
                         yield return match;
-                }
             }
         }
 
         /// <summary>Returns an enumerator that iterates through a collection.</summary>
-        /// <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the collection.</returns>
+        /// <returns>
+        /// An <see cref="T:System.Collections.IEnumerator" /> object that can be
+        /// used to iterate through the collection.
+        /// </returns>
         IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+            => GetEnumerator();
     }
 }

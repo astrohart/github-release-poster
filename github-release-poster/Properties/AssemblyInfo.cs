@@ -1,16 +1,21 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("xyLOGIX github-release-poster")]
-[assembly: AssemblyDescription("Pushes a release to GitHub if you call it from the command-line.  Network access is required.")]
+[assembly:
+    AssemblyDescription(
+        "Pushes a release to GitHub if you call it from the command-line.  Network access is required."
+    )]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("xyLOGIX, LLC")]
 [assembly: AssemblyProduct("xyLOGIX github-release-poster")]
-[assembly: AssemblyCopyright("Copyright (c) 2019 by xyLOGIX,LLC.  All rights reserved.")]
+[assembly:
+    AssemblyCopyright(
+        "Copyright (c) 2019 by xyLOGIX,LLC.  All rights reserved."
+    )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
