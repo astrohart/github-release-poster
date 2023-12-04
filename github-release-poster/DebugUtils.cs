@@ -1,4 +1,5 @@
-﻿using github_release_poster.Properties;
+using PostSharp.Patterns.Model;
+using github_release_poster.Properties;
 using log4net;
 using System;
 using System.Collections;
@@ -87,6 +88,7 @@ namespace github_release_poster
         /// Occurs whenever text has been emitted by a <see cref="Write" />
         /// method.
         /// </summary>
+        [WeakEvent]
         public static event Action<string, DebugLevel> TextEmitted;
 
         /// <summary> Dumps a collection to the debug log. </summary>
