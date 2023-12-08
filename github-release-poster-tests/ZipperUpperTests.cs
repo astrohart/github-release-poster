@@ -1,11 +1,12 @@
-﻿using github_release_poster;
+using PostSharp.Patterns.Threading;
+using github_release_poster;
 using NUnit.Framework;
 using System;
 using System.IO;
 
 namespace github_release_poster_tests
 {
-    [TestFixture]
+    [TextFixture, ExplicitlySynchronized]
     public class ZipperUpperTests
     {
         /// <summary> Fake, gibberish file/directory path </summary>

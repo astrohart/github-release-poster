@@ -1,10 +1,11 @@
-﻿using github_release_poster;
+using PostSharp.Patterns.Threading;
+using github_release_poster;
 using NUnit.Framework;
 using System.IO;
 
 namespace github_release_poster_tests
 {
-    [TestFixture]
+    [TextFixture, ExplicitlySynchronized]
     public class LogFileManagerTests
     {
         /// <summary> Path to the application configuration file. </summary>

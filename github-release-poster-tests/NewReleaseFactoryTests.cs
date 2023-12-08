@@ -1,4 +1,5 @@
-﻿using github_release_poster;
+using PostSharp.Patterns.Threading;
+using github_release_poster;
 using github_release_poster_tests.Properties;
 using NUnit.Framework;
 using System;
@@ -9,7 +10,7 @@ namespace github_release_poster_tests
     /// Provides unit tests for the methods in the
     /// <see cref="T:github_release_poster.NewReleaseFactory" /> class.
     /// </summary>
-    [TestFixture]
+    [TextFixture, ExplicitlySynchronized]
     public class NewReleaseFactoryTests
     {
         [Test]

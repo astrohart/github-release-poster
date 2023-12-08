@@ -1,10 +1,11 @@
-﻿using github_release_poster;
+using PostSharp.Patterns.Threading;
+using github_release_poster;
 using github_release_poster.Properties;
 using NUnit.Framework;
 
 namespace github_release_poster_tests
 {
-    [TestFixture]
+    [TextFixture, ExplicitlySynchronized]
     public class GitHubReleasePosterTests
     {
         /// <summary>
