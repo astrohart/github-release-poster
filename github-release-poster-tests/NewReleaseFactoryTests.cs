@@ -10,7 +10,7 @@ namespace github_release_poster_tests
     /// Provides unit tests for the methods in the
     /// <see cref="T:github_release_poster.NewReleaseFactory" /> class.
     /// </summary>
-    [TextFixture, ExplicitlySynchronized]
+    [TestFixture, ExplicitlySynchronized]
     public class NewReleaseFactoryTests
     {
         [Test]

@@ -6,7 +6,7 @@ using System.IO;
 
 namespace github_release_poster_tests
 {
-    [TextFixture, ExplicitlySynchronized]
+    [TestFixture, ExplicitlySynchronized]
     public class ZipperUpperTests
     {
         /// <summary> Fake, gibberish file/directory path </summary>

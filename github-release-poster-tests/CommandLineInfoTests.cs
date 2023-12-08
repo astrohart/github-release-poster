@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace github_release_poster_tests
 {
-    [TextFixture, ExplicitlySynchronized]
+    [TestFixture, ExplicitlySynchronized]
     public class CommandLineInfoTests
     {
         /// <summary>
