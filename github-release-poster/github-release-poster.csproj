@@ -60,6 +60,12 @@
   <PropertyGroup>
     <ApplicationIcon>github-icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=5.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Costura.Fody.5.7.0\lib\netstandard1.0\Costura.dll</HintPath>
@@ -131,6 +137,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="key.snk" />
     <Compile Include="AssetUploader.cs" />
     <Compile Include="CommandLineInfo.cs" />
     <Compile Include="DebuggerDump.cs" />
