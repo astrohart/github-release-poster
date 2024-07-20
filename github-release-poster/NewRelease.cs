@@ -1,4 +1,4 @@
-﻿namespace github_release_poster
+namespace github_release_poster
 {
     public class NewRelease
     {

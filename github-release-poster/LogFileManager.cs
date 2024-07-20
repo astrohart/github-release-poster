@@ -1,4 +1,4 @@
-﻿using log4net.Config;
+using log4net.Config;
 using System;
 using System.Diagnostics;
 using System.IO;
