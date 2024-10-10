@@ -1,4 +1,4 @@
-using PostSharp.Patterns.Threading;
+﻿using PostSharp.Patterns.Threading;
 using github_release_poster;
 using NUnit.Framework;
 using System;

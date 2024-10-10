@@ -1,4 +1,4 @@
-using github_release_poster.Properties;
+﻿using github_release_poster.Properties;
 using log4net;
 using System;
 using System.Collections;

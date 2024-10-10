@@ -1,4 +1,4 @@
-using log4net.Repository.Hierarchy;
+﻿using log4net.Repository.Hierarchy;
 
 namespace github_release_poster
 {

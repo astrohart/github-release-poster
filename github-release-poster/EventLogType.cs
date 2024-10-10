@@ -1,4 +1,4 @@
-namespace github_release_poster
+﻿namespace github_release_poster
 {
     /// <summary> The type of event log to write events to. </summary>
     public enum EventLogType

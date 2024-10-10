@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace github_release_poster
 {

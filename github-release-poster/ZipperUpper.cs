@@ -1,4 +1,4 @@
-using github_release_poster.Properties;
+﻿using github_release_poster.Properties;
 using ICSharpCode.SharpZipLib.Zip;
 using System;
 using System.IO;
