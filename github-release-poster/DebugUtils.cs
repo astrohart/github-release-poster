@@ -261,7 +261,7 @@ namespace github_release_poster
                 // cannot do anything with a blank entry.
                 return;
 
-            if (!LogFileManager.IsLoggingInitialized && !NoConsole)
+            if (!LoggingSubsystemManager.IsLoggingInitialized && !NoConsole)
             {
                 /* only write to the console if the log file manager is not initialized yet */
                 Console.WriteLine(format, args);

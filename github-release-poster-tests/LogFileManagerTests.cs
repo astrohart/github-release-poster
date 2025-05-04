@@ -6,7 +6,7 @@ using System.IO;
 namespace github_release_poster_tests
 {
     [TestFixture, ExplicitlySynchronized]
-    public class LogFileManagerTests
+    public class LoggingSubsystemManagerTests
     {
         /// <summary> Path to the application configuration file. </summary>
         private const string AppConfigPath =
@@ -14,34 +14,34 @@ namespace github_release_poster_tests
 
         /// <summary>
         /// Tests the
-        /// <see cref="M:github_release_poster.LogFileManager.InitializeLogging" /> method
+        /// <see cref="M:github_release_poster.LoggingSubsystemManager.InitializeLogging" /> method
         /// being called with no parameters.
         /// </summary>
         [Test]
         public void InitializeLoggingTestWithNoParams()
         {
-            LogFileManager.InitializeLogging();
+            LoggingSubsystemManager.InitializeLogging();
 
             AssertLogFileInitialized();
         }
 
         /// <summary>
         /// Tests the
-        /// <see cref="M:github_release_poster.LogFileManager.InitializeLogging" /> method.
+        /// <see cref="M:github_release_poster.LoggingSubsystemManager.InitializeLogging" /> method.
         /// </summary>
         [Test]
         public void InitializeLoggingTestWithLogFilePath()
         {
             Assert.IsTrue(File.Exists(AppConfigPath));
 
-            LogFileManager.InitializeLogging(false, true, AppConfigPath);
+            LoggingSubsystemManager.InitializeLogging(false, true, AppConfigPath);
 
             AssertLogFileInitialized();
         }
 
         private static void AssertLogFileInitialized()
             => Assert.IsTrue(
-                LogFileManager.IsLoggingInitialized,
+                LoggingSubsystemManager.IsLoggingInitialized,
                 "Failed to initialize the log file."
             );
     }

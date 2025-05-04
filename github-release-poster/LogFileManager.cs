@@ -8,11 +8,11 @@ using System.Reflection;
 namespace github_release_poster
 {
     /// <summary> Methods to be used to manage the application log. </summary>
-    public static class LogFileManager
+    public static class LoggingSubsystemManager
     {
         /// <summary>
         /// Gets a value indicating whether this
-        /// <see cref="T:github_release_poster.LogFileManagers" /> instance has been
+        /// <see cref="T:github_release_poster.LoggingSubsystemManagers" /> instance has been
         /// initialized properly.
         /// </summary>
         public static bool IsLoggingInitialized { get; private set; }
@@ -63,7 +63,7 @@ namespace github_release_poster
         )
         {
             // write the name of the current class and method we are now entering, into the log
-            Console.WriteLine("In LogFileManager.InitializeLogging");
+            Console.WriteLine("In LoggingSubsystemManager.InitializeLogging");
 
             // Check whether the path to the configuration file is blank; or, if it's not blank, whether the specified file actually exists at the path indicated.
             // If the configuration file pathname is blank and/or it does not exist at the path indicated, then call the version of XmlConfigurator.Configure that does
@@ -105,7 +105,7 @@ namespace github_release_poster
                 if (!ConfigureLogFileFromEmbeddedResource())
                 {
                     Console.WriteLine(
-                        "LogFileManager.InitializeLogging: Failed to initialize logging from embedded configuration file."
+                        "LoggingSubsystemManager.InitializeLogging: Failed to initialize logging from embedded configuration file."
                     );
                     return;
                 }
@@ -127,12 +127,12 @@ namespace github_release_poster
 
                 // Dump the variable logFileDirectoryParent to the log
                 Console.WriteLine(
-                    "LogFileManager.InitializeLogging: logFileDirectoryParent = '{0}'",
+                    "LoggingSubsystemManager.InitializeLogging: logFileDirectoryParent = '{0}'",
                     logFileDirectoryParent
                 );
 
                 Console.WriteLine(
-                    "LogFileManager.InitializeLogging: Checking whether the user has write-level access to the folder '{0}'...",
+                    "LoggingSubsystemManager.InitializeLogging: Checking whether the user has write-level access to the folder '{0}'...",
                     logFileDirectoryParent
                 );
 
@@ -142,7 +142,7 @@ namespace github_release_poster
                     ))
                 {
                     Console.WriteLine(
-                        @"LogFileManager.InitializeLogging: The user '{0}\{1}' does not have write-level access to the folder '{2}'.",
+                        @"LoggingSubsystemManager.InitializeLogging: The user '{0}\{1}' does not have write-level access to the folder '{2}'.",
                         Environment.UserDomainName, Environment.UserName,
                         logFileDirectoryParent
                     );
@@ -252,7 +252,7 @@ namespace github_release_poster
         {
             // write the name of the current class and method we are now entering, into the log
             Console.WriteLine(
-                "In LogFileManager.ConfigureLogFileFromEmbeddedResource"
+                "In LoggingSubsystemManager.ConfigureLogFileFromEmbeddedResource"
             );
 
             var result = false;
@@ -282,7 +282,7 @@ namespace github_release_poster
             }
 
             Console.WriteLine(
-                "LogFileManager.ConfigureLogFileFromEmbeddedResource: Done."
+                "LoggingSubsystemManager.ConfigureLogFileFromEmbeddedResource: Done."
             );
 
             return result;
@@ -292,10 +292,10 @@ namespace github_release_poster
         private static void DeleteLogIfExists()
         {
             // write the name of the current class and method we are now entering, into the log
-            Console.WriteLine("In LogFileManager.DeleteLogIfExists");
+            Console.WriteLine("In LoggingSubsystemManager.DeleteLogIfExists");
 
             Console.WriteLine(
-                "LogFileManager.DeleteLogIfExists: Checking whether the folder '{0}' is writable...",
+                "LoggingSubsystemManager.DeleteLogIfExists: Checking whether the folder '{0}' is writable...",
                 LogFileDirectoryName
             );
 
@@ -304,24 +304,24 @@ namespace github_release_poster
                 // If we cannot write to the folder where the log file to be deleted sits in, then Heaven help us!  However the software
                 // should try to work at all costs, so this method should just silently fail in this case.
                 Console.WriteLine(
-                    "LogFileManager.DeleteLogIfExists: The folder '{0}' is not writable, so we can't delete the log file '{1}' as requested.  Nothing to do.",
+                    "LoggingSubsystemManager.DeleteLogIfExists: The folder '{0}' is not writable, so we can't delete the log file '{1}' as requested.  Nothing to do.",
                     LogFileDirectoryName, LogFilePath
                 );
 
-                Console.WriteLine("LogFileManager.DeleteLogIfExists: Done.");
+                Console.WriteLine("LoggingSubsystemManager.DeleteLogIfExists: Done.");
 
                 return;
             }
 
             Console.WriteLine(
-                "LogFileManager.DeleteLogIfExists: The folder '{0}' is writable, so therefore we can delete the log file '{1}'.",
+                "LoggingSubsystemManager.DeleteLogIfExists: The folder '{0}' is writable, so therefore we can delete the log file '{1}'.",
                 LogFileDirectoryName, LogFilePath
             );
 
             try
             {
                 Console.WriteLine(
-                    "LogFileManager.DeleteLogIfExists: Deleting the log file folder '{0}' and all files and folders within it, and then re-creating the folder...",
+                    "LoggingSubsystemManager.DeleteLogIfExists: Deleting the log file folder '{0}' and all files and folders within it, and then re-creating the folder...",
                     LogFileDirectoryName
                 );
 
@@ -333,7 +333,7 @@ namespace github_release_poster
 
                 if (Directory.Exists(LogFileDirectoryName))
                     Console.WriteLine(
-                        "LogFileManager:DeleteLogIfExists: Successfully deleted and re-created the folder '{0}'.",
+                        "LoggingSubsystemManager:DeleteLogIfExists: Successfully deleted and re-created the folder '{0}'.",
                         LogFileDirectoryName
                     );
             }
@@ -343,13 +343,13 @@ namespace github_release_poster
                 DebugUtils.LogException(e);
             }
 
-            Console.WriteLine("LogFileManager.DeleteLogIfExists: Done.");
+            Console.WriteLine("LoggingSubsystemManager.DeleteLogIfExists: Done.");
         }
 
         private static string GetDebugApplicationName()
         {
             // write the name of the current class and method we are now entering, into the log
-            Console.WriteLine("In LogFileManager.GetDebugApplicationName");
+            Console.WriteLine("In LoggingSubsystemManager.GetDebugApplicationName");
 
             var entryAssembly = Assembly.GetEntryAssembly();
             if (entryAssembly == null)
@@ -359,7 +359,7 @@ namespace github_release_poster
 
             // Dump the variable entryAssemblyLocation to the log
             Console.WriteLine(
-                $@"LogFileManager.InitializeLogging: entryAssemblyLocation = '{entryAssemblyLocation}'"
+                $@"LoggingSubsystemManager.InitializeLogging: entryAssemblyLocation = '{entryAssemblyLocation}'"
             );
 
             var versionInfo =
@@ -368,10 +368,10 @@ namespace github_release_poster
             var result = versionInfo.ProductName;
 
             Console.WriteLine(
-                $"LogFileManager.GetDebugApplicationName: Result = {result}"
+                $"LoggingSubsystemManager.GetDebugApplicationName: Result = {result}"
             );
 
-            Console.WriteLine("LogFileManager.GetDebugApplicationName: Done.");
+            Console.WriteLine("LoggingSubsystemManager.GetDebugApplicationName: Done.");
 
             return result;
         }
