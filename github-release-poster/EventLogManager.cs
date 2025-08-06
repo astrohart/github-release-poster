@@ -15,7 +15,7 @@ namespace github_release_poster
         /// Constructs an instance of <see cref="T:EventLogManager" /> and
         /// returns a reference to the new instance.
         /// </summary>
-        protected EventLogManager()
+        private EventLogManager()
         {
             // set defaults
             Source = string.Empty;

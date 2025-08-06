@@ -24,7 +24,7 @@ namespace github_release_poster
         /// This constructor is marked protected, since this class is a
         /// singleton.
         /// </remarks>
-        protected CommandLineInfo()
+        private CommandLineInfo()
             => Clear();
 
         /// <summary> Gets or sets text for the body of the release.  May be blank. </summary>
