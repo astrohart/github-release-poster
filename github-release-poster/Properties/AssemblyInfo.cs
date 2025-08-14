@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("xyLOGIX github-release-poster")]
 [assembly:
     AssemblyCopyright(
-        "Copyright © (c) 2019 by xyLOGIX,LLC.  All rights reserved."
+        "Copyright © 2019 by xyLOGIX,LLC.  All rights reserved."
     )]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
