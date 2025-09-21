@@ -28,44 +28,44 @@ namespace github_release_poster
         /// Gets or sets the name of the application.  Used for Windows event
         /// logging.  Leave blank to not send events to the Application event log.
         /// </summary>
-        public static string ApplicationName { get; set; }
+        public static string ApplicationName { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
-        public static bool ConsoleOnly { get; set; }
+        public static bool ConsoleOnly { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets the depth down the call stack from which Exception
         /// information should be obtained.
         /// </summary>
-        public static int ExceptionStackDepth { get; set; }
+        public static int ExceptionStackDepth { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
-        public static bool IsLogging { get; set; }
+        public static bool IsLogging { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Users should set this property to the path to the log file, if
         /// logging.
         /// </summary>
-        public static string LogFilePath { get; set; }
+        public static string LogFilePath { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether to mute "DEBUG" log messages
         /// in Release mode.
         /// </summary>
-        public static bool MuteDebugLevelIfReleaseMode { get; set; }
+        public static bool MuteDebugLevelIfReleaseMode { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets a value which indicates whether output should never be
         /// written to the console. This property trumps <see cref="ConsoleOnly" />.
         /// </summary>
-        public static bool NoConsole { get; set; }
+        public static bool NoConsole { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
-        public static TextWriter Out { get; set; }
+        public static TextWriter Out { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Value that specifies the verbosity level of the debug logger. -1
         /// suppresses all output to all logs; 0 writes only minimal output, and 1 writes
         /// all logging.
         /// </summary>
-        public static int Verbosity { get; set; }
+        public static int Verbosity { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Clears any messages to the system console so that the subsystem can
@@ -449,7 +449,7 @@ namespace github_release_poster
         }
 
         /*
-                private static bool LoggerConfigured { get; set; }
+                private static bool LoggerConfigured { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
         */
     }
 }
