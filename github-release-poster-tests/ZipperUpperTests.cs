@@ -17,7 +17,7 @@ namespace github_release_poster_tests
         /// Valid path to a directory that commonly exists on Win10 systems --
         /// the Downloads folder! LOL
         /// </summary>
-        public string ValidDirectoryPath { get; } = Path.Combine(
+        public string ValidDirectoryPath { [DebuggerStepThrough] get; } = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
             @"Dropbox\Downloads"
         );
@@ -27,7 +27,7 @@ namespace github_release_poster_tests
         /// after a GUID in a subfolder of the user's Desktop folder that is itself also
         /// named after a GUID.
         /// </summary>
-        public string ValidZipFilePath { get; } = Path.Combine(
+        public string ValidZipFilePath { [DebuggerStepThrough] get; } = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.Desktop),
             $@"{Guid.NewGuid()}\tempFiles_{Guid.NewGuid()}.zip"
         );
