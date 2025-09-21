@@ -15,7 +15,7 @@ namespace github_release_poster
         /// <see cref="T:github_release_poster.LoggingSubsystemManagers" /> instance has been
         /// initialized properly.
         /// </summary>
-        public static bool IsLoggingInitialized { get; private set; }
+        public static bool IsLoggingInitialized { [DebuggerStepThrough] get; [DebuggerStepThrough] private set; }
 
         /// <summary> Gets the name of the directory that the log file is located in. </summary>
         private static string LogFileDirectoryName
