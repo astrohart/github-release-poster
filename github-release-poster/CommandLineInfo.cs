@@ -28,7 +28,7 @@ namespace github_release_poster
             => Clear();
 
         /// <summary> Gets or sets text for the body of the release.  May be blank. </summary>
-        public string Body { get; set; }
+        public string Body { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets a reference to the one and only instance of
@@ -39,40 +39,40 @@ namespace github_release_poster
                (_theCommandLineInfo = new CommandLineInfo());
 
         /// <summary> Gets or sets a flag indicating whether this release is a draft. </summary>
-        public bool IsDraft { get; set; }
+        public bool IsDraft { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets a flag that indicates whether the release is
         /// pre-release.
         /// </summary>
-        public bool IsPreRelease { get; set; }
+        public bool IsPreRelease { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary> Gets or sets the name of this release. </summary>
-        public string Name { get; set; }
+        public string Name { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// (Required.) Gets or sets the path to the folder that contains all the
         /// asset for the release.
         /// </summary>
-        public string ReleaseAssetDir { get; set; }
+        public string ReleaseAssetDir { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets the name of the GitHub repository to which to post the
         /// new relase.
         /// </summary>
-        public string RepoName { get; set; }
+        public string RepoName { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets the GitHub username of the repository to which the
         /// release is being posted.
         /// </summary>
-        public string RepoOwner { get; set; }
+        public string RepoOwner { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets a flag indicating whether a version message should be
         /// displayed.
         /// </summary>
-        public bool ShouldDisplayVersion { get; set; }
+        public bool ShouldDisplayVersion { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets a flag indicating whether the release assets should be
@@ -84,28 +84,28 @@ namespace github_release_poster
         /// specify the '--no-zip' flag on the command line to set this flag to true.  By
         /// default, it's initialized to have the value of false.
         /// </remarks>
-        public bool ShouldNotZip { get; set; }
+        public bool ShouldNotZip { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary> Gets or sets the name of this release's GitHub tag. </summary>
-        public string TagName { get; set; }
+        public string TagName { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// (Required.) Gets or sets the name of the target branch.  Default is
         /// 'master'.
         /// </summary>
-        public string TargetBranch { get; set; }
+        public string TargetBranch { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets or sets the user access token to be passed to GitHub for
         /// authentication.
         /// </summary>
-        public string UserAccessToken { get; set; }
+        public string UserAccessToken { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
 
         /// <summary>
         /// Gets a value that indicates whether the command-line arguments were
         /// parsed correctly.
         /// </summary>
-        public bool WasCommandLineParsed { get; private set; }
+        public bool WasCommandLineParsed { [DebuggerStepThrough] get; [DebuggerStepThrough] private set; }
 
         /// <summary> Resets this object's properties to their default values. </summary>
         public void Clear()
