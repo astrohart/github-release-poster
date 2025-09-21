@@ -13,7 +13,7 @@ namespace github_release_poster_tests
         /// Valid command-line arguments for testing.  This set of arguments
         /// represents the full set, including optional ones.
         /// </summary>
-        public static string[] ValidFullTestingArgs { get; } =
+        public static string[] ValidFullTestingArgs { [DebuggerStepThrough] get; } =
         {
             "--repo-owner", "astrohart", "--repo-name",
             " github-release-poster", "--user-access-token",
@@ -37,7 +37,7 @@ namespace github_release_poster_tests
         /// --tag-name Testing --target-branch master --user-access-token &lt;guid with no
         /// dashes&gt; --repo-name github-release-poster --repo-owner astrohart
         /// </remarks>
-        public static string[] ValidTestingArgs { get; } =
+        public static string[] ValidTestingArgs { [DebuggerStepThrough] get; } =
         {
             "--repo-owner", "astrohart", "--repo-name",
             " github-release-poster", "--user-access-token",
