@@ -2,11 +2,11 @@
 {
     public class NewRelease
     {
-        public string body { get; set; }
-        public bool draft { get; set; }
-        public string name { get; set; }
-        public bool prerelease { get; set; }
-        public string tag_name { get; set; }
-        public string target_commitish { get; set; }
+        public string body { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
+        public bool draft { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
+        public string name { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
+        public bool prerelease { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
+        public string tag_name { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
+        public string target_commitish { [DebuggerStepThrough] get; [DebuggerStepThrough] set; }
     }
 }
