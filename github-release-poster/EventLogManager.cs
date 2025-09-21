@@ -46,7 +46,7 @@ namespace github_release_poster
         /// This property must be set before logging events, otherwise an error
         /// will occur.
         /// </remarks>
-        public string Source { get; private set; }
+        public string Source { [DebuggerStepThrough] get; [DebuggerStepThrough] private set; }
 
         /// <summary>
         /// Gets or sets the type of log to which events are to be sent
@@ -56,7 +56,7 @@ namespace github_release_poster
         /// This property must be set before logging events, otherwise an error
         /// will occur.
         /// </remarks>
-        public EventLogType Type { get; private set; }
+        public EventLogType Type { [DebuggerStepThrough] get; [DebuggerStepThrough] private set; }
 
         /// <summary>
         /// Sends an Error event to the system event log pointed to by the
