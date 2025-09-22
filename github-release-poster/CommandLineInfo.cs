@@ -1,4 +1,5 @@
-﻿using github_release_poster.Properties;
+﻿using System.Diagnostics;
+using github_release_poster.Properties;
 using System;
 using System.Collections.Generic;
 using System.IO;
