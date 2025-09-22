@@ -1,4 +1,5 @@
-﻿namespace github_release_poster
+﻿using System.Diagnostics;
+namespace github_release_poster
 {
     public class NewRelease
     {
