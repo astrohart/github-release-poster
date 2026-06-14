@@ -26,6 +26,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\x64\Debug\github-release-poster.xml</DocumentationFile>
+    <NoWarn>1591, 1587, 1580, 1584</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -37,6 +38,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\x64\Release\github-release-poster.xml</DocumentationFile>
+    <NoWarn>1591, 1587, 1580, 1584</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -48,6 +50,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\x86\Debug\github-release-poster.xml</DocumentationFile>
+    <NoWarn>1591, 1587, 1580, 1584</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
@@ -59,6 +62,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <DocumentationFile>bin\x86\Release\github-release-poster.xml</DocumentationFile>
+    <NoWarn>1591, 1587, 1580, 1584</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>github-icon.ico</ApplicationIcon>
